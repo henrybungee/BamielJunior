@@ -1,16 +1,20 @@
-//https://discord.com/api/oauth2/authorize?client_id=851569621106032651&permissions=134466624&scope=bot
+//https://discord.com/api/oauth2/authorize?client_id=851569621106032651&permissions=379968&scope=bot
 
-const Discord = require("discord.js")
-const client = new Discord.Client()
+const Discord = require('discord.js');
+const client = new Discord.Client();
 
-client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`)
+//handle the file system stuff
+const fs = require('fs');
+
+fs.readdir('./events/', (err, files) => {
+  files.forEach(file => {
+    const eventHandler = require(`./events/${file}`)
+    const eventName = file.split('.')[0]
+
+    client.on(eventName, arg => eventHandler(client, arg));
+  })
 })
 
-client.on("message", msg => {
-  if (msg.content === "ping") {
-    msg.reply("pong");
-  }
-})
+console.log("IM READY!!!");
 
-client.login("ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.__fiiO0DyMoA_fiGV6EhIcVuQ84");
+client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.uR6q2HnRqnY6mbExRJ4w5oBDx5w');
