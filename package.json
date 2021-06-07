@@ -1,0 +1,14 @@
+{
+  "name": "bamieljunior",
+  "version": "1.0.0",
+  "description": "bot for the c418 server",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "author": "Joe mama (aka. Henry or HIDINGINABUSH)",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  }
+}
