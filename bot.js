@@ -17,4 +17,4 @@ fs.readdir('./events/', (err, files) => {
 
 console.log("IM READY!!!");
 
-client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.uR6q2HnRqnY6mbExRJ4w5oBDx5w');
+client.login('insert token');
