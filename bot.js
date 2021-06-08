@@ -15,6 +15,4 @@ fs.readdir('./events/', (err, files) => {
   })
 })
 
-console.log("IM READY!!!");
-
-client.login('insert token');
+client.login('insert token here');
