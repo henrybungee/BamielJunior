@@ -17,6 +17,10 @@ module.exports = (client, msg) => {
         return msg.channel.send("Supply a valid user ID plz");
     }
 
+    if (user.user.bot) {
+        return msg.channel.send("Bro bots don't have profiles, they can't do anything wrong");
+    }
+
     if (!reason) {
         return msg.channel.send("Look pal, if you ain't gonna give us an actual report then why submit one in the first place?");
     }

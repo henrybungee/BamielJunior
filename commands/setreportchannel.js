@@ -19,7 +19,7 @@ module.exports = (client, msg) => {
     var channel = msg.guild.channels.cache.get(channelID);
 
     if (!channel) {
-        return msg.channel.send("Supply a valid channel ID, buddy ol' pal");
+        return msg.channel.send("Supply a valid channel ID, buddy ol' pal (or something that I can actually view)");
     }
 
     directory = path.join(__dirname + '/../storage/reportchannel.json')

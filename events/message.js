@@ -21,6 +21,7 @@ const setcustomlink = require('../commands/setcustomlink');
 const setreportchannel = require('../commands/setreportchannel');
 const report = require('../commands/report');
 const reportchannel = require('../commands/reportchannel');
+const help = require('../commands/help');
 
 
 module.exports = async (client, msg) => {
@@ -113,5 +114,9 @@ module.exports = async (client, msg) => {
 
     if (msg.content.startsWith(prefix + "rchannel")) {
         return reportchannel(client, msg);
+    }
+
+    if (msg.content.startsWith(prefix + "help")) {
+        return help(client, msg);
     }
 }

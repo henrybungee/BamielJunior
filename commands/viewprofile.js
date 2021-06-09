@@ -44,6 +44,10 @@ module.exports = (client, msg) => {
         return msg.channel.send("Please mention a user or paste an ID!");
     }
 
+    if (user.user.bot) {
+        return msg.channel.send("Bots don't have profiles so don't go lookin' for one");
+    }
+
     const profile = new Discord.MessageEmbed()
         .setTitle(nameBotstorage[user.id] ? nameBotstorage[user.id] : user.user.username)
         .setColor(colorBotstorage[user.id] ? colorBotstorage[user.id] : "#303030")
@@ -59,6 +63,10 @@ module.exports = (client, msg) => {
 
     if (clBotstorage[user.id]) {
         profile.addField("Custom Link:", `[Click here](${clBotstorage[user.id]})`)
+    }
+
+    if (user.id === "527523815660453889") {
+        profile.addField("Trophies (gifted by owner):", "⚙️ Bot Dev\n😎 Epic Person");
     }
 
     msg.channel.send(profile);

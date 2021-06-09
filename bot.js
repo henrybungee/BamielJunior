@@ -15,4 +15,4 @@ fs.readdir('./events/', (err, files) => {
   })
 })
 
-client.login('test token');
+client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.VDZAu11dErGmYLKh6aIQPz8X6rM');

@@ -18,6 +18,10 @@ module.exports = (client, msg) => {
         return msg.channel.send("Supply a name bro");
     }
 
+    if (name.length > 30) {
+        return msg.channel.send("Your name is too long! Make sure it is under **30** characters long!");
+    }
+
     botstorage[msg.author.id] = name;
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 
