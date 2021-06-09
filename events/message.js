@@ -18,6 +18,9 @@ const settreelink = require('../commands/settreelink');
 const setspotify = require('../commands/setspotify');
 const viewspotify = require('../commands/viewspotify');
 const setcustomlink = require('../commands/setcustomlink');
+const setreportchannel = require('../commands/setreportchannel');
+const report = require('../commands/report');
+const reportchannel = require('../commands/reportchannel');
 
 
 module.exports = async (client, msg) => {
@@ -98,5 +101,17 @@ module.exports = async (client, msg) => {
 
     if (msg.content.startsWith(prefix + "setcustom")) {
         return setcustomlink(client, msg);
+    }
+
+    if (msg.content.startsWith(prefix + "setrpchannel")) {
+        return setreportchannel(client, msg);
+    }
+
+    if (msg.content.startsWith(prefix + "report")) {
+        return report(client, msg);
+    }
+
+    if (msg.content.startsWith(prefix + "rchannel")) {
+        return reportchannel(client, msg);
     }
 }

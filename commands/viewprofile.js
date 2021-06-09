@@ -46,7 +46,7 @@ module.exports = (client, msg) => {
 
     const profile = new Discord.MessageEmbed()
         .setTitle(nameBotstorage[user.id] ? nameBotstorage[user.id] : user.user.username)
-        .setColor(colorBotstorage[user.id] ? colorBotstorage[user.id] : "#ffffff")
+        .setColor(colorBotstorage[user.id] ? colorBotstorage[user.id] : "#303030")
         .setThumbnail(user.user.displayAvatarURL({dynamic: true}))
         .setDescription(descBotstorage[user.id] ? descBotstorage[user.id] : "No description set")
         .addField("DAW:", dawsBotstorage[user.id] ? dawsBotstorage[user.id] : "No DAW set")
