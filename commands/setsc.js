@@ -15,7 +15,7 @@ module.exports = (client, msg) => {
 
     function findWord(word, str) {
         return RegExp('\\b'+ word +'\\b').test(str)
-      }
+    }
       
     if (!link) {
         return msg.channel.send(soundcloudEmoji.toString() + " Bro you must provide a link!");
@@ -44,7 +44,7 @@ module.exports = (client, msg) => {
         .setTitle("Soundcloud Successfully Set!")
         .setColor("#ff7700")
         .setDescription(soundcloudEmoji.toString() + " Your Soundcloud has been successfully set!")
-        .setFooter("View your link on your profile with !profile")
+        .setFooter("View your link on your profile with $profile")
         .setTimestamp();
 
     msg.channel.send(successEmbed);

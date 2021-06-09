@@ -13,6 +13,11 @@ module.exports = (client, msg) => {
 
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let name = args.slice(1).join(" ");
+
+    if (!name) {
+        return msg.channel.send("Supply a name bro");
+    }
+
     botstorage[msg.author.id] = name;
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 

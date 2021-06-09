@@ -31,7 +31,7 @@ module.exports = (client, msg) => {
         .setTitle("Youtube Successfully Set!")
         .setColor("#c4302b")
         .setDescription(yt.toString() + " Your Youtube has been successfully set!")
-        .setFooter("View your link on your profile with !profile")
+        .setFooter("View your link on your profile with $profile")
         .setTimestamp();
 
     msg.channel.send(successEmbed);

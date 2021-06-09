@@ -39,7 +39,7 @@ module.exports = (client, msg) => {
         .setTitle("Bandcamp Successfully Set!")
         .setColor("#629aa9")
         .setDescription(bandcampEmoji.toString() + " Your Bandcamp has been successfully set!")
-        .setFooter("View your link on your profile with !profile")
+        .setFooter("View your link on your profile with $profile")
         .setTimestamp();
 
     msg.channel.send(successEmbed);

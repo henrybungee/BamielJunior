@@ -14,8 +14,11 @@ module.exports = (client, msg) => {
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let color = args.slice(1).join(" ");
     if (!color) {
-        return msg.channel.send('🎨 Please specify a color. Use hex colors only!');
+        return msg.channel.send('🎨 Please specify a color. Use hex colors only! Leave your color as `#ffffff` for the default embed color.');
     }
+
+    if (!color.startsWith("#"))
+        return msg.channel.send("Hex codes start with a `#`, bro. If you don't have one, it's not a hex. Please fix that.")
     botstorage[msg.author.id] = color;
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 

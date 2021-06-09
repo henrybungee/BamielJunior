@@ -14,6 +14,10 @@ const setdaw = require('../commands/setdaw');
 const setsc = require('../commands/setsc');
 const viewsc = require('../commands/viewsc');
 const setprofilecolor = require('../commands/setprofilecolor');
+const settreelink = require('../commands/settreelink');
+const setspotify = require('../commands/setspotify');
+const viewspotify = require('../commands/viewspotify');
+const setcustomlink = require('../commands/setcustomlink');
 
 
 module.exports = async (client, msg) => {
@@ -52,7 +56,7 @@ module.exports = async (client, msg) => {
         return setname(client, msg);
     }
 
-    if (msg.content.startsWith(prefix + 'profile') || msg.content.replace(/\s/g, "") === prefix + 'p') {
+    if (msg.content.startsWith(prefix + 'profile') || msg.content.startsWith(prefix + 'p ') || msg.content.replace(/\s/g, "") === prefix + 'p') {
         return viewprofile(client, msg);
     }
 
@@ -80,4 +84,19 @@ module.exports = async (client, msg) => {
         return setprofilecolor(client, msg);
     }
 
+    if (msg.content.startsWith(prefix + "setlt")) {
+        return settreelink(client, msg);
+    }
+
+    if (msg.content.startsWith(prefix + "setspotify")) {
+        return setspotify(client, msg);
+    }
+
+    if (msg.content.startsWith(prefix + "spotify")) {
+        return viewspotify(client, msg);
+    }
+
+    if (msg.content.startsWith(prefix + "setcustom")) {
+        return setcustomlink(client, msg);
+    }
 }
