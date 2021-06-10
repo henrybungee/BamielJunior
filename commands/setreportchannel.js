@@ -8,9 +8,9 @@ module.exports = (client, msg) => {
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     var channelID = args[1];
 
-    // if (!msg.author.hasPermission("ADMINISTRATOR") || !msg.author.hasPermission("MANAGE_CHANNELS")) {
-    //     return msg.channel.send("✋ Stop right there. I can't let you do that.");
-    // }
+    if (!msg.member.hasPermission("ADMINISTRATOR") || !msg.member.hasPermission("MANAGE_CHANNELS")) {
+        return msg.channel.send("✋ Stop right there. I can't let you do that.");
+    }
 
     if (!channelID) {
         return msg.channel.send("Needa specify a channel ID that I'll send reports to.");

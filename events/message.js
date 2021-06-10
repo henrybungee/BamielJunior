@@ -22,7 +22,7 @@ const setreportchannel = require('../commands/setreportchannel');
 const report = require('../commands/report');
 const reportchannel = require('../commands/reportchannel');
 const help = require('../commands/help');
-
+const trophies = require('../commands/trophies');
 
 module.exports = async (client, msg) => {
 
@@ -118,5 +118,9 @@ module.exports = async (client, msg) => {
 
     if (msg.content.startsWith(prefix + "help")) {
         return help(client, msg);
+    }
+
+		if (msg.content.startsWith(prefix + "trophies")) {
+        return trophies(client, msg);
     }
 }
