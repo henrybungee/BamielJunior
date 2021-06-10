@@ -1,7 +1,5 @@
 const Discord = require('discord.js');
 const ping = require('../commands/ping');
-const storage = require('../commands/storage');
-const callstorage = require('../commands/callstorage');
 const setbandcamp = require('../commands/setbandcamp');
 const viewbc = require('../commands/viewbc');
 const setyt = require('../commands/setyt');
@@ -23,6 +21,7 @@ const report = require('../commands/report');
 const reportchannel = require('../commands/reportchannel');
 const help = require('../commands/help');
 const trophies = require('../commands/trophies');
+const setfav = require('../commands/setfav');
 
 module.exports = async (client, msg) => {
 
@@ -30,14 +29,6 @@ module.exports = async (client, msg) => {
 
     if (msg.content.startsWith(prefix + 'ping')) {
         return ping(client, msg);
-    }
-
-    if (msg.content.startsWith(prefix + 'test')) {
-        return storage(client, msg);
-    }
-
-    if (msg.content.startsWith(prefix + 'recall')) {
-        return callstorage(client, msg);
     }
 
     if (msg.content.startsWith(prefix + 'setbc')) {
@@ -122,5 +113,9 @@ module.exports = async (client, msg) => {
 
 		if (msg.content.startsWith(prefix + "trophies")) {
         return trophies(client, msg);
+    }
+
+		if (msg.content.startsWith(prefix + "setfav")) {
+        return setfav(client, msg);
     }
 }

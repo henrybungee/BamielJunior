@@ -10,6 +10,7 @@ const colorBotstorage = require(path.join(__dirname + '/../storage/color.json'))
 const ltBotstorage = require(path.join(__dirname + '/../storage/treelink.json'));
 const spotBotstorage = require(path.join(__dirname + '/../storage/spotify.json'));
 const clBotstorage = require(path.join(__dirname + '/../storage/custom.json'));
+const favBotstorage = require(path.join(__dirname + '/../storage/favorite.json'));
 
 const fs = require('fs');
 
@@ -64,9 +65,12 @@ module.exports = (client, msg) => {
         .setTimestamp();
 
     if (clBotstorage[user.id]) {
-        profile.addField("Custom Link:", `[Click here](${clBotstorage[user.id]})`)
+        profile.addField("Custom Link:", `[Click here](${clBotstorage[user.id]})`);
     }
 
+		if (favBotstorage[user.id]) {
+			profile.addField("Fav Musician: ", favBotstorage[user.id]);
+		}
 
     //trophies
     if (user.id === "527523815660453889") {
