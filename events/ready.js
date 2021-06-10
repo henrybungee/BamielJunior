@@ -4,5 +4,5 @@ const { stat } = require("fs");
 module.exports = (client, msg) => {
     console.log("Im ready");
 
-    client.user.setActivity(" over the C418 Discord (in dev rn)", { type: "WATCHING"});
+    client.user.setActivity(" the C418 server and linking some music", { type: "WATCHING"});
 }
