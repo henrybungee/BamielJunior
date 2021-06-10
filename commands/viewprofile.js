@@ -27,6 +27,8 @@ module.exports = (client, msg) => {
     let bandcampEmoji = client.emojis.cache.find(emoji => emoji.name === "bandcamp");
     let scEmoji = client.emojis.cache.find(emoji => emoji.name === "soundcloud");
     let spotEmoji = client.emojis.cache.find(emoji => emoji.name === "spotify");
+    let priz = client.emojis.cache.find(emoji => emoji.name === "priz");
+
 
     if (!userMention) {
         user = msg.guild.members.cache.get(id);
@@ -65,8 +67,18 @@ module.exports = (client, msg) => {
         profile.addField("Custom Link:", `[Click here](${clBotstorage[user.id]})`)
     }
 
+
+    //trophies
     if (user.id === "527523815660453889") {
         profile.addField("Trophies (gifted by owner):", "⚙️ Bot Dev\n😎 Epic Person");
+    }
+
+    if (user.id === "481591703959240706") {
+        profile.addField("Trophies (gifted by owner):", priz.toString() + " PRIZ ;]");
+    }
+
+    if (user.id === "271045041487740940") {
+        profile.addField("Trophies (gifted by owner):", "⚙️ Early Tester\n💠 Cool Dude v2");
     }
 
     msg.channel.send(profile);
