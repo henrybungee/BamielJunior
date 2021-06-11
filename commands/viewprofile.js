@@ -70,15 +70,19 @@ module.exports = (client, msg) => {
 
     //trophies
     if (user.id === "527523815660453889") {
-        profile.addField("Trophies (gifted by owner):", "⚙️ Bot Dev\n😎 Epic Person");
+        profile.addField("🏆 Trophies (gifted by owner):", "⚙️ Bot Dev\n😎 Epic Person");
     }
 
     if (user.id === "481591703959240706") {
-        profile.addField("Trophies (gifted by owner):", priz.toString() + " PRIZ ;]");
+        profile.addField("🏆 Trophies (gifted by owner):", priz.toString() + " PRIZ ;]\n💻 Coder Man");
     }
 
     if (user.id === "271045041487740940") {
-        profile.addField("Trophies (gifted by owner):", "⚙️ Early Tester\n💠 Cool Dude v2");
+        profile.addField("🏆 Trophies (gifted by owner):", "⚙️ Early Tester\n💠 Cool Dude v2");
+    }
+
+    if (user.id === "235833960364638219") {
+        profile.addField("🏆 Trophies (gifted by owner):", "⚙️ Early Tester");
     }
 
     msg.channel.send(profile);

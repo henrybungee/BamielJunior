@@ -15,4 +15,4 @@ fs.readdir('./events/', (err, files) => {
   })
 })
 
-client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.RHU6dD6ncWoNeh_f_xGJ9prSbJc');
+client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.lyZxHWkcB3bkj_XuimabCsWYZVs');
