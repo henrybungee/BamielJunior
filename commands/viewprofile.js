@@ -17,6 +17,7 @@ const fs = require('fs');
 module.exports = (client, msg) => {
 
     let prefix = "%";
+		let userBlacklisted = false;
 
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
 
@@ -85,5 +86,20 @@ module.exports = (client, msg) => {
         profile.addField("Trophies (gifted by owner):", "⚙️ Early Tester\n💠 Cool Dude v2");
     }
 
-    msg.channel.send(profile);
+		function checkToSend(blacklisted) {
+			if (blacklisted) {
+				msg.channel.send("This user has been blaclisted! This means their profile is inaccessible to everyone.");
+			}
+			
+			else if (!blacklisted) {
+				msg.channel.send(profile);				
+			}
+		}
+
+		fs.readFileSync('./blacklist.txt', 'utf-8').split(/\r?\n/).every(function(line){
+			if (msg.author.id === line) {
+				userBlacklisted = true;
+				checkToSend(userBlacklisted);
+			}
+		});
 }
