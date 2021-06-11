@@ -10,12 +10,14 @@ const colorBotstorage = require(path.join(__dirname + '/../storage/color.json'))
 const ltBotstorage = require(path.join(__dirname + '/../storage/treelink.json'));
 const spotBotstorage = require(path.join(__dirname + '/../storage/spotify.json'));
 const clBotstorage = require(path.join(__dirname + '/../storage/custom.json'));
+const favBotstorage = require(path.join(__dirname + '/../storage/favorite.json'));
 
 const fs = require('fs');
 
 module.exports = (client, msg) => {
 
     let prefix = "%";
+		let userBlacklisted = false;
 
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
 
@@ -64,9 +66,12 @@ module.exports = (client, msg) => {
         .setTimestamp();
 
     if (clBotstorage[user.id]) {
-        profile.addField("Custom Link:", `[Click here](${clBotstorage[user.id]})`)
+        profile.addField("Custom Link:", `[Click here](${clBotstorage[user.id]})`);
     }
 
+		if (favBotstorage[user.id]) {
+			profile.addField("Fav Musician: ", favBotstorage[user.id]);
+		}
 
     //trophies
     if (user.id === "527523815660453889") {
@@ -85,5 +90,20 @@ module.exports = (client, msg) => {
         profile.addField("🏆 Trophies (gifted by owner):", "⚙️ Early Tester");
     }
 
-    msg.channel.send(profile);
+		function checkToSend(blacklisted) {
+			if (blacklisted) {
+				msg.channel.send("This user has been blaclisted! This means their profile is inaccessible to everyone.");
+			}
+			
+			else if (!blacklisted) {
+				msg.channel.send(profile);				
+			}
+		}
+
+		fs.readFileSync('./blacklist.txt', 'utf-8').split(/\r?\n/).every(function(line){
+			if (msg.author.id === line) {
+				userBlacklisted = true;
+				checkToSend(userBlacklisted);
+			}
+		});
 }
