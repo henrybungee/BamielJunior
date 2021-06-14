@@ -15,14 +15,14 @@ fs.readdir('./events/', (err, files) => {
   })
 })
 
-client.login('');
+client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.8VEWNlQnZCvhZ746HoyocoADKQY');
 
 //TODO LIST
-//#1: trophies command does something if you have trophies
-//#2: Blacklist list is admin-only
-//#3: Change the name of the change report channel command
-//#4: report should support pings, not just IDs
-//#5: Don't show the report channel name when confirming the report
+//#1: trophies command does something if you have trophies (DONE)
+//#2: Blacklist list is admin-only (DONE)
+//#3: Change the name of the change report channel command (DONE)
+//#4: report should support pings, not just IDs (DONE)
+//#5: Don't show the report channel name when confirming the report (DONE)
 
 //5 issues, not bad. It's better than 6. or 7 or anything else. 
 //But it's not better than 4 or under. R.I.P.

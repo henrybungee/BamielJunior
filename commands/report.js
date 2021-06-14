@@ -11,11 +11,11 @@ module.exports = (client, msg) => {
 
     let check = client.emojis.cache.find(emoji => emoji.name === "tommycheck");
 
-    let user = msg.guild.members.cache.get(userID);
+    let user = msg.guild.members.cache.get(userID) || msg.guild.members.cache.get(msg.mentions.members.first().id);
 
-    if (!user) {
-        return msg.channel.send("Supply a valid user ID plz");
-    }
+		if (!user) {
+			return msg.channel.send("Supply a valid user or ping!");
+		}
 
     if (user.user.bot) {
         return msg.channel.send("Bro bots don't have profiles, they can't do anything wrong");
@@ -38,7 +38,7 @@ module.exports = (client, msg) => {
     const reportSuccessEmbed = new Discord.MessageEmbed()
         .setAuthor(user.user.username + " reported", user.user.displayAvatarURL({dynamic:true}))
         .setTitle("📣 Report Sent!")
-        .setDescription(check.toString() + " Your report has been sent to `#" +rChannel.name+ "`!")
+        .setDescription(check.toString() + " Your report has been sent to the reports channel")
         .setFooter("Report pending investigation")
         .setTimestamp();
 

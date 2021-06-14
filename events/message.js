@@ -120,7 +120,7 @@ module.exports = async (client, msg) => {
 			return setcustomlink(client, msg);
 	}
 
-	if (msg.content.startsWith(prefix + "setrpchannel") && !userBlacklisted) {
+	if (msg.content.startsWith(prefix + "setrchannel") && !userBlacklisted) {
 			return setreportchannel(client, msg);
 	}
 

@@ -10,6 +10,10 @@ module.exports = (client, msg) => {
 
     var text = fs.readFileSync('./blacklist.txt', 'utf-8');
 
+		if (!msg.member.hasPermission("ADMINISTRATOR")) {
+			return msg.channel.send("You need the `ADMINISTRATOR` permission to use this command. \n\n**Why?** This command doesn't exist to shame people. Admins are the most trusted people in this server so we know they'll use this information in a positive way.");
+		}
+
     function lineCount( text ) {
         var nLines = 0;
         for( var i = 0, n = text.length;  i < n;  ++i ) {
@@ -35,5 +39,5 @@ module.exports = (client, msg) => {
         }
     });
 
-    msg.channel.send(blacklistEmbed);
+    msg.author.send(blacklistEmbed);
 }
