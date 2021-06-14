@@ -44,6 +44,14 @@ module.exports = async (client, msg) => {
 		});
 	}
 
+	if (msg.content.toLowerCase().includes("among us")) {
+		msg.channel.send("sussy");
+	}
+
+	if (msg.channel.type === 'dm' && !msg.author.bot) {
+		return msg.channel.send("I don't work in DMs! Use me in a server.")
+	}
+
 	if (msg.content.startsWith(prefix + 'ping') && !userBlacklisted) {
 		return ping(client, msg);
 	}

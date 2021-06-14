@@ -15,4 +15,4 @@ fs.readdir('./events/', (err, files) => {
   })
 })
 
-client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.gvefRGv3Re9RicBp-fxLhdwTaxY');
+client.login('insert-token-here');

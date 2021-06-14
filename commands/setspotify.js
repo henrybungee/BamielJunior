@@ -14,7 +14,7 @@ module.exports = (client, msg) => {
     let link = args[1];
 
     if (!link)
-        return msg.channel.send("Please supply a linktr.ee link! If you're not here for the linktree set up, then you're in the wrong place.");
+        return msg.channel.send("Supply a Spotify link plz");
     
     if (!link.startsWith('https://open.spotify.com/artist/')) {
            return msg.channel.send("Provide a Spotify link plz " +spotify.toString());
