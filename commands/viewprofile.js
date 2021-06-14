@@ -90,20 +90,25 @@ module.exports = (client, msg) => {
         profile.addField("🏆 Trophies (gifted by owner):", "⚙️ Early Tester");
     }
 
-		function checkToSend(blacklisted) {
-			if (blacklisted) {
-				msg.channel.send("This user has been blaclisted! This means their profile is inaccessible to everyone.");
-			}
-			
-			else if (!blacklisted) {
-				msg.channel.send(profile);				
-			}
-		}
+    function lineCount( text ) {
+        var nLines = 0;
+        for( var i = 0, n = text.length;  i < n;  ++i ) {
+            if( text[i] === '\n' ) {
+                ++nLines;
+            }
+        }
+        return nLines;
+    }
 
-		fs.readFileSync('./blacklist.txt', 'utf-8').split(/\r?\n/).every(function(line){
-			if (msg.author.id === line) {
-				userBlacklisted = true;
-				checkToSend(userBlacklisted);
-			}
-		});
+    fs.readFileSync('./blacklist.txt', 'utf-8').split(/\r?\n/).every(function(line){
+        if (user.id === line) {
+            userBlacklisted = true;
+            msg.channel.send("❌ This user has been blacklisted! This means their profile is inaccessible to everyone.");  
+            return false;    
+        }
+
+        msg.channel.send(profile);
+
+    });
+
 }
