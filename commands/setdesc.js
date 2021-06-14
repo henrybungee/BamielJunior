@@ -17,6 +17,10 @@ module.exports = (client, msg) => {
     if (!desc)
         return msg.channel.send("Please supply a description! This will show up on your profile.");
 
+		if (desc.length > 280) {
+        return msg.channel.send("Your description is too long! Make sure it is under **280** characters long. Think tweet long.");
+    }
+
     botstorage[msg.author.id] = desc;
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 
@@ -24,7 +28,7 @@ module.exports = (client, msg) => {
         .setTitle("Description Successfully Set!")
         .setColor("#a1ff5e")
         .setDescription(check.toString() + " Description successfully changed!")
-        .setFooter("View your profile with !profile")
+        .setFooter("View your profile with $profile")
         .setTimestamp();
 
     msg.channel.send(successEmbed);

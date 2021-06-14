@@ -90,6 +90,10 @@ module.exports = (client, msg) => {
         profile.addField("🏆 Trophies (gifted by owner):", "⚙️ Early Tester");
     }
 
+		if (user.id === "743256356533960754") {
+        profile.addField("🏆 Trophies (gifted by owner):", "⚙️ Early Tester\n💛 Big Pee");
+		}
+
     function lineCount( text ) {
         var nLines = 0;
         for( var i = 0, n = text.length;  i < n;  ++i ) {

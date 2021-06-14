@@ -16,6 +16,10 @@ module.exports = (client, msg) => {
 	botstorage[msg.author.id] = favorite;
 	fs.writeFileSync(directory, JSON.stringify(botstorage));
 
+	if (favorite.length > 15) {
+		return msg.channel.send("Your favorite artist is too long! Make sure it is under **15** characters long! If this is the actual artist's name, email a mod or the creator and we'll make an exception for you.");
+	}
+
 	const successEmbed = new Discord.MessageEmbed()
 		.setTitle("Successfully set your favorite musician " +checkmark.toString())
 		.setColor("#27f568")
