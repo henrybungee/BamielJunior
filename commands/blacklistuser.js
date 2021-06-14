@@ -10,9 +10,9 @@ module.exports = (client, msg) => {
 
 	var check = client.emojis.cache.find(emoji => emoji.name === "tommycheck");
 
-	// if (!msg.member.hasPermission("ADMINISTRATOR")) {
-	// 	return msg.channel.send("You cannot perform this action. You don't have the `ADMINISTRATOR` permission.");
-	// }
+	if (!msg.member.hasPermission("ADMINISTRATOR")) {
+		return msg.channel.send("You cannot perform this action. You don't have the `ADMINISTRATOR` permission.");
+	}
 
 	if (!userArg) {
 		return msg.channel.send("Pass a user ID so we can blacklist them");

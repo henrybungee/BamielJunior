@@ -15,4 +15,12 @@ fs.readdir('./events/', (err, files) => {
   })
 })
 
-client.login('insert-token-here');
+client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.MQAg5JlkX7G_LuUeBWOc6PvFK2E');
+
+//TODO LIST
+//#1: trophies command does something if you have trophies
+//#2: Blacklist list is admin-only
+//#3: Change the name of the change report channel command
+//#4: report should support pings, not just IDs
+//#5: Don't show the report channel name when confirming the report
+//#6: 
