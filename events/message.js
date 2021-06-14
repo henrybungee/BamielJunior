@@ -26,6 +26,7 @@ const trophies = require('../commands/trophies');
 const setfav = require('../commands/setfav');
 const blacklist = require('../commands/blacklistuser');
 const listbanned = require('../commands/listbanned');
+const feedback = require('../commands/featurerecommend');
 
 module.exports = async (client, msg) => {
 
@@ -150,5 +151,9 @@ module.exports = async (client, msg) => {
 
 	if (msg.content.startsWith(prefix + "list") && !userBlacklisted) {
 		return listbanned(client, msg);
+	}
+
+	if (msg.content.startsWith(prefix + "feedback") && !userBlacklisted) {
+		return feedback(client, msg);
 	}
 }

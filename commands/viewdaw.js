@@ -95,6 +95,7 @@ module.exports = (client, msg) => {
 				embed.addField("DAW Website:", "(Soundtrap)[https://www.soundtrap.com/]");	
 				break;
 			default:
+				embed.setFooter("Is your DAW not on the list? Send your DAW\nto the creator with $feedback.");
 				break;
 		}
 
