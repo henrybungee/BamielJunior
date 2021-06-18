@@ -12,6 +12,9 @@ module.exports = (client, msg) => {
         return msg.channel.send("✋ Stop right there. I can't let you do that.");
     }
 
+    if(channelID.toString().startswith("<#"))
+        channelID = channelID.slice(2,-1); // <#123> --> 123
+
     if (!channelID) {
         return msg.channel.send("Needa specify a channel ID that I'll send reports to.");
     }
@@ -19,7 +22,7 @@ module.exports = (client, msg) => {
     var channel = msg.guild.channels.cache.get(channelID);
 
     if (!channel) {
-        return msg.channel.send("Supply a valid channel ID, buddy ol' pal (or something that I can actually view)");
+        return msg.channel.send("Supply a valid channel ID, buddy ol' pal. If it is a valid channel, make sure I have permissions to see it.");
     }
 
     directory = path.join(__dirname + '/../storage/reportchannel.json')

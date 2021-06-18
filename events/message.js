@@ -53,107 +53,136 @@ module.exports = async (client, msg) => {
 		return msg.channel.send("I don't work in DMs! Use me in a server.")
 	}
 
-	if (msg.content.startsWith(prefix + 'ping') && !userBlacklisted) {
-		return ping(client, msg);
-	}
+	if(userBlacklisted)
+        return
 
-	if (msg.content.startsWith(prefix + 'setbc') && !userBlacklisted) {
-			return setbandcamp(client, msg);
-	}
+    switch(msg.content.split(" ")[0].split(prefix)[1]) {
+        case "ping":
+            ping(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + 'bc') && !userBlacklisted) {
-			return viewbc(client, msg);
-	}
+        case "setbc":
+        case "setbandcamp": // Easy aliases
+            setbandcamp(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + 'setyt') && !userBlacklisted) {
-			return setyt(client, msg);
-	}
+        case "setyt":
+        case "setyoutube":
+            setyt(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + 'yt') && !userBlacklisted) {
-			return viewyt(client, msg);
-	}
-	
-	if (msg.content.startsWith(prefix + 'setname') && !userBlacklisted) {
-			return setname(client, msg);
-	}
+        case "setname":
+            setname(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + 'profile') || msg.content.startsWith(prefix + 'p ') || msg.content.replace(/\s/g, "") === prefix + 'p' && !userBlacklisted) {
-			return viewprofile(client, msg);
-	}
+        case "profile":
+        case "p":
+            viewprofile(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + 'setd ') && !userBlacklisted) {
-			return setdesc(client, msg);
-	}
+        case "setd":
+        case "setdesc":
+        case "setdescription":
+        case "setbio":
+            setdesc(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + 'daw') && !userBlacklisted) {
-			return viewdaw(client, msg);
-	}
+        case "setdaw":
+            setdaw(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "setdaw") && !userBlacklisted) {
-			return setdaw(client, msg);
-	}
+        case "setsc":
+        case "setsoundcloud":
+        case "setscloud":
+            setsc(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "setsc") && !userBlacklisted) {
-			return setsc(client, msg);
-	}
+        case "setcolor":
+        case "sethex":
+            setprofilecolor(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "sc") && !userBlacklisted) {
-			return viewsc(client, msg);
-	}
+        case "setlt":
+        case "setlinktree":
+            settreelink(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "setcolor") && !userBlacklisted) {
-			return setprofilecolor(client, msg);
-	}
+        case "setsp":
+        case "setspotify":
+            setspotify(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "setlt") && !userBlacklisted) {
-			return settreelink(client, msg);
-	}
+        case "setcustom":
+        case "setwebsite":
+            setcustomlink(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "setspotify") && !userBlacklisted) {
-			return setspotify(client, msg);
-	}
+        case "setrchannel":
+        case "setreportchannel":
+        case "setreportingchannel":
+            reportchannel(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "spotify") && !userBlacklisted) {
-			return viewspotify(client, msg);
-	}
+        case "setfav":
+            setfav(client, msg);
+            return
 
-	if (msg.content.startsWith(prefix + "setcustom") && !userBlacklisted) {
-			return setcustomlink(client, msg);
-	}
+        case "?":
+        case "help":
+            help(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "setrchannel") && !userBlacklisted) {
-			return setreportchannel(client, msg);
-	}
+        case "bc":
+        case "bandcamp":
+            viewbc(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "report") && !userBlacklisted) {
-			return report(client, msg);
-	}
+        case "yt":
+        case "youtube":
+            viewyt(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "rchannel") && !userBlacklisted) {
-			return reportchannel(client, msg);
-	}
+        case "daw":
+            viewdaw(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "help") && !userBlacklisted) {
-			return help(client, msg);
-	}
+        case "sc":
+        case "soundcloud":
+            viewsc(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "trophies") && !userBlacklisted) {
-			return trophies(client, msg);
-	}
+        case "report":
+            report(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "setfav") && !userBlacklisted) {
-			return setfav(client, msg);
-	}
+        case "sp":
+        case "spotify":
+            viewspotify(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "blacklist") && !userBlacklisted) {
-			return blacklist(client, msg);
-	}
+        case "trophies":
+            trophies(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "list") && !userBlacklisted) {
-		return listbanned(client, msg);
-	}
+        case "rchannel":
+        case "reportchannel":
+        case "reportingchannel":
+            reportchannel(client, msg);
+            break;
 
-	if (msg.content.startsWith(prefix + "feedback") && !userBlacklisted) {
-		return feedback(client, msg);
-	}
+        case "list":
+        case "blacklisted":
+        case "listbanned":
+            listbanned(client, msg);
+            break;
+
+        case "feedback":
+        case "feature":
+            feedback(client, msg);
+            break;
+
+        case "blacklist":
+            blacklist(client, msg);
+            break;
+    }
 }

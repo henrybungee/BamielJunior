@@ -14,8 +14,11 @@ module.exports = (client, msg) => {
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let daw = args.slice(1).join(" ");
     if (!daw) {
-        return msg.channel.send('Supply a DAW dum dum');
+        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
+        botstorage[msg.author.id] = desc;
+        return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
+
     botstorage[msg.author.id] = daw;
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 

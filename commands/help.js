@@ -6,9 +6,35 @@ module.exports = (client, msg) => {
         .setAuthor("Requested by " +msg.author.tag, msg.author.displayAvatarURL({dyanmic:true}))
         .setColor("#fff170")
         .setDescription("But people here just call me Bamiel Junior. \nHere are my commands. My prefix is: `$`")
-        .addField("Basics:", "help, ping, trophies, profile, report, rchannel, \nlist, blacklist, feedback")
-        .addField("Setting Links:", "setbc, setyt, setsc, setspotify, setd,\n setname, setlt, setcolor, setcustom, \nsetdaw, setrchannel")
-        .addField("View Links:", "bc, yt, sc, daw, spotify")
+        .addField("Basics:", `\
+help - This command!
+ping - Bot's ping time
+trophies - View your trophies
+profile - View your profile
+report - Report someone's profile
+rchannel - View the channel where reports are sent **\***
+list - View blacklisted users **\***
+blacklist - Blacklist a user **\***
+feedback - Send feedback to the bot dev`)
+        .addField("Setting Links:", `\
+setbc - Bandcamp
+setyt - YouTube
+setsc - SoundCloud
+setspotify - Spotify
+setd - Description
+setname - Profile name
+setlt - Linktree
+setcolor - Custom color
+setcustom - Custom link
+setdaw - DAW
+setrchannel - Reporting channel **\***`)
+        .addField("View Links:", `\
+bc - Bandcamp
+yt - YouTube
+sc - SoundCloud
+daw - DAW
+spotify - Spotify
+trophies - Trophies`)
         .setTimestamp();
 
     msg.channel.send(helpEmbed);
