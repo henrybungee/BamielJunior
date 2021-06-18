@@ -14,8 +14,11 @@ module.exports = (client, msg) => {
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let link = args[1];
 
-    if (!link)
-        return msg.channel.send("Please supply a YouTube channel link!");
+    if (!link) {
+        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
+        botstorage[msg.author.id] = desc;
+        return fs.writeFileSync(directory, JSON.stringify(botstorage));
+    }
 
     if (!link.startsWith("https://www.youtube.com/channel/")) {
         msg.channel.send("Invalid YouTube channel link!");

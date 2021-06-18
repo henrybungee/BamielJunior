@@ -16,9 +16,11 @@ module.exports = (client, msg) => {
     function findWord(word, str) {
         return RegExp('\\b'+ word +'\\b').test(str)
     }
-      
+
     if (!link) {
-        return msg.channel.send(soundcloudEmoji.toString() + " Bro you must provide a link!");
+        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
+        botstorage[msg.author.id] = desc;
+        return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 
     if (!link.startsWith("https://")) {
@@ -30,7 +32,7 @@ module.exports = (client, msg) => {
         return msg.channel.send("Supply a link plz");
     }
 
-    
+
     if (!findWord("soundcloud", link)) {
         return msg.channel.send("Supply a soundcloud link plz");
     }

@@ -14,10 +14,13 @@ module.exports = (client, msg) => {
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let desc = args.slice(1).join(" ");
 
-    if (!desc)
-        return msg.channel.send("Please supply a description! This will show up on your profile.");
+    if (!desc) {
+        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
+        botstorage[msg.author.id] = desc;
+        return fs.writeFileSync(directory, JSON.stringify(botstorage));
+    }
 
-		if (desc.length > 280) {
+    if(desc.length > 280) {
         return msg.channel.send("Your description is too long! Make sure it is under **280** characters long. Think tweet long.");
     }
 

@@ -15,10 +15,13 @@ module.exports = (client, msg) => {
 
     function findWord(word, str) {
         return RegExp('\\b'+ word +'\\b').test(str)
-      }
-      
+    }
+
     if (!bcLink) {
-        return msg.channel.send(bandcampEmoji.toString() + " Bro you must provide a link!");
+        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
+        botstorage[msg.author.id] = desc;
+        return fs.writeFileSync(directory, JSON.stringify(botstorage));
+    }
     }
 
     if (!bcLink.startsWith("https://")) {
