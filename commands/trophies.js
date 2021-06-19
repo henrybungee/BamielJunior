@@ -10,10 +10,15 @@ module.exports = (client, msg) => {
 
 	//trophies
 
+	let prefix = "$";
+
+	var args = msg.content.slice(prefix.length).trim().split(/ +/g);
 	var user = msg.mentions.users.first();
 
 	if (!user) {
-		user = msg.author;
+		user = msg.guild.members.cache.get(args[1]).user;
+		if (!user) 
+			user = msg.author;
 	}
 
 	const profile = new Discord.MessageEmbed()

@@ -3,6 +3,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+const disbut = require('discord-buttons')(client);
+
 //handle the file system stuff
 const fs = require('fs');
 
@@ -15,7 +17,7 @@ fs.readdir('./events/', (err, files) => {
   })
 })
 
-client.login('');
+client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.OGpaqC5BPewDV6t3t16KgsKDs_c');
 
 //TODO LIST
 //#1: trophies command does something if you have trophies (DONE)
