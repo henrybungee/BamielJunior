@@ -25,7 +25,7 @@ module.exports = (client, msg) => {
     if (!userMention && !args[1]) {
         user = msg.guild.members.cache.get(msg.author.id);
     }
-    
+
     if (!user) {
         return msg.channel.send("Please mention a user or paste an ID!");
     }
@@ -38,66 +38,85 @@ module.exports = (client, msg) => {
 
     console.log(botstorage[user.id]);
 
-		var lowerCaseDAW = botstorage[user.id].toLowerCase().split(" ").join("");
+        var lowerCaseDAW = botstorage[user.id].toLowerCase().split(" ").join("");
 
     const embed = new Discord.MessageEmbed()
         .setAuthor(user.user.tag + "'s DAW of Choice", user.user.displayAvatarURL({dynamic: true}))
         .setDescription(botstorage[user.id])
         .setTimestamp();
 
-		switch(lowerCaseDAW) {
-			case "lmms":
-				embed.addField("DAW Website:", "[LMMS](https://lmms.io/)");
-				break;
-			case "ableton":
-				embed.addField("DAW Website:", "[Ableton Live](https://www.ableton.com/en/live/)");
-				break;
-			case "abletonlive":
-				embed.addField("DAW Website:", "[Ableton Live](https://www.ableton.com/en/live/)");
-				break;
-			case "live":
-				embed.addField("DAW Website:", "[Ableton Live](https://www.ableton.com/en/live/)");
-				break;
-			case "flstudio": 
-				embed.addField("DAW Website:", "[FL Studio](https://www.image-line.com/)");
-				break;
-			case "fl":
-				embed.addField("DAW Website:", "[FL Studio](https://www.image-line.com/)");
-				break;
-			case "logic":
-				embed.addField("DAW Website:", "[Logic Pro](https://www.apple.com/logic-pro/)");
-				break;
-			case "logicpro":
-				embed.addField("DAW Website:", "[Logic Pro](https://www.apple.com/logic-pro/)");
-				break;
-			case "logicprox":
-				embed.addField("DAW Website:", "[Logic Pro](https://www.apple.com/logic-pro/)");
-				break;
-			case "cubase":
-				embed.addField("DAW Website:", "[Cubase](https://new.steinberg.net/cubase/)");
-				break;
-			case "reason":
-				embed.addField("DAW Website:", "[Reason](https://www.reasonstudios.com/en/reason)");
-				break;
-			case "reaper":
-				embed.addField("DAW Website:", "[Reaper](https://www.reaper.fm/)");
-				break;
-			case "bitwig":
-				embed.addField("DAW Website:", "[Bitwig](https://www.bitwig.com/)");
-				break;
-			case "garageband":
-				embed.addField("DAW Website:", "Everyone knows where Garageband is noob");
-				break;
-			case "protools":
-				embed.addField("DAW Website:", "(Pro Tools)[https://www.avid.com/pro-tools]");
-				break;
-			case "soundtrap":
-				embed.addField("DAW Website:", "(Soundtrap)[https://www.soundtrap.com/]");	
-				break;
-			default:
-				embed.setFooter("Is your DAW not on the list? Send your DAW\nto the creator with $feedback.");
-				break;
-		}
+        switch(lowerCaseDAW) {
+            // DAWs
+
+            case "lmms":
+                embed.addField("DAW Website:", "[LMMS](https://lmms.io/)");
+                break;
+            case "ableton":
+                embed.addField("DAW Website:", "[Ableton Live](https://www.ableton.com/en/live/)");
+                break;
+            case "abletonlive":
+                embed.addField("DAW Website:", "[Ableton Live](https://www.ableton.com/en/live/)");
+                break;
+            case "live":
+                embed.addField("DAW Website:", "[Ableton Live](https://www.ableton.com/en/live/)");
+                break;
+            case "flstudio":
+                embed.addField("DAW Website:", "[FL Studio](https://www.image-line.com/)");
+                break;
+            case "fl":
+                embed.addField("DAW Website:", "[FL Studio](https://www.image-line.com/)");
+                break;
+            case "logic":
+            case "logicpro":
+            case "logicprox":
+            case "logic pro":
+            case "logic pro x":
+                embed.addField("DAW Website:", "[Logic Pro](https://www.apple.com/logic-pro/)");
+                break;
+            case "cubase":
+                embed.addField("DAW Website:", "[Cubase](https://new.steinberg.net/cubase/)");
+                break;
+            case "reason":
+                embed.addField("DAW Website:", "[Reason](https://www.reasonstudios.com/en/reason)");
+                break;
+            case "reaper":
+                embed.addField("DAW Website:", "[Reaper](https://www.reaper.fm/)");
+                break;
+            case "bitwig":
+                embed.addField("DAW Website:", "[Bitwig](https://www.bitwig.com/)");
+                break;
+            case "garageband":
+                embed.addField("DAW Website:", "Everyone knows where Garageband is, noob. If not, [[macOS]](https://www.apple.com/mac/garageband/) [[iOS]](https://www.apple.com/garageband/)");
+                break;
+            case "protools":
+                embed.addField("DAW Website:", "[Pro Tools](https://www.avid.com/pro-tools)\n*what a beastly machine*");
+                break;
+            case "soundtrap":
+                embed.addField("DAW Website:", "[Soundtrap](https://www.soundtrap.com/)");
+                break;
+            case "muse":
+                embed.addField("DAW Website:", "[MusE](https://muse-sequencer.github.io/)\n*check out musescore too!*")
+                break;
+
+            // Scores
+            case "sibelius":
+                embed.addField("DAW Website:", "[Sibelius](https://www.avid.com/sibelius)\n*sibelius crashed*");
+                break;
+            case "dorico":
+                embed.addField("DAW Website:", "[Dorico](https://new.steinberg.net/dorico)\n*advanced*");
+                break;
+            case "musescore":
+            case "muse score":
+                embed.addField("DAW Website:", "[Mu͒seScore](https://musescore.com)");
+                break;
+            case "finale":
+                embed.addField("DAW Website:", "[Finale](https://www.finalemusic.com/)");
+                break;
+
+            default:
+                embed.setFooter("Is your DAW/Score Editor not on the list? Send your DAW\nto the creator with $feedback.");
+                break;
+        }
 
     msg.channel.send(embed);
 

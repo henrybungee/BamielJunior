@@ -4,28 +4,28 @@ const botstorage = require(path.join(__dirname + '/../storage/favorite.json')); 
 const fs = require('fs');
 
 module.exports = (client, msg) => {
-	directory = path.join(__dirname + '/../storage/favorite.json')
+    directory = path.join(__dirname + '/../storage/favorite.json')
 
-	let prefix = "$";
+    let prefix = "$";
 
-	var checkmark = client.emojis.cache.find(emoji => emoji.name === "tommycheck");
+    var checkmark = client.emojis.cache.find(emoji => emoji.name === "tommycheck");
 
-	var args = msg.content.slice(prefix.length).trim().split(/ +/g);
-	let favorite = args.slice(1).join(" ");
+    var args = msg.content.slice(prefix.length).trim().split(/ +/g);
+    let favorite = args.slice(1).join(" ");
 
-	botstorage[msg.author.id] = favorite;
-	fs.writeFileSync(directory, JSON.stringify(botstorage));
+    botstorage[msg.author.id] = favorite;
+    fs.writeFileSync(directory, JSON.stringify(botstorage));
 
-	if (favorite.length > 15) {
-		return msg.channel.send("Your favorite artist is too long! Make sure it is under **15** characters long! If this is the actual artist's name, email a mod or the creator and we'll make an exception for you.");
-	}
+    if (favorite.length > 30) {
+        return msg.channel.send("Your favorite artist's name is too long! Make sure it is under **30** characters long! If this is the actual artist's name, email a mod or the creator and we'll make an exception for you.");
+    }
 
-	const successEmbed = new Discord.MessageEmbed()
-		.setTitle("Successfully set your favorite musician " +checkmark.toString())
-		.setColor("#27f568")
-		.setDescription("On your profile your favorite musician will now be: `" +favorite+ "`! Why would you put this information in? Everyone has some form of inspiration! It's important to let others interested in your work know who's behind your madness. Or maybe not.")
-		.setTimestamp();
+    const successEmbed = new Discord.MessageEmbed()
+        .setTitle("Successfully set your favorite musician " +checkmark.toString())
+        .setColor("#27f568")
+        .setDescription("On your profile your favorite musician will now be: `" +favorite+ "`! Why would you put this information in? Everyone has some form of inspiration! It's important to let others interested in your work know who's behind your madness. Or maybe not.")
+        .setTimestamp();
 
 
-	msg.channel.send(successEmbed);
+    msg.channel.send(successEmbed);
 }

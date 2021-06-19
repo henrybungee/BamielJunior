@@ -18,9 +18,12 @@ module.exports = (client, msg) => {
         return RegExp('\\b'+ word +'\\b').test(str)
     }
 
-    if (!linktree)
-        return msg.channel.send("Please supply a linktr.ee link! If you're not here for the linktree set up, then you're in the wrong place.");
-    
+    if (!linktree) {
+        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
+        botstorage[msg.author.id] = desc;
+        return fs.writeFileSync(directory, JSON.stringify(botstorage));
+    }
+
     if (!linktree.startsWith('https://')) {
         return msg.channel.send("That ain't a link, buddy.");
     }
