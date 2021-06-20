@@ -16,7 +16,7 @@ module.exports = (client, msg) => {
 
     if (!name) {
         msg.channel.send("Got it, your artist/moniker has been cleared.");
-        botstorage[msg.author.id] = null;
+        botstorage[msg.author.id] = "";
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 

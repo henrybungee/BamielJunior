@@ -32,7 +32,7 @@ module.exports = (client, msg) => {
 
     directory = path.join(__dirname + '/../storage/daws.json')
 
-    if (!botstorage[user.id]) {
+    if (!botstorage[user.id] || botstorage[user.id].length <= 0) {
         return msg.channel.send(user.user.username + " doesn't have a DAW of choice (probably doesn't make music)!");
     }
 

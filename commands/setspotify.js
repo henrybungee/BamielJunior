@@ -23,7 +23,7 @@ module.exports = (client, msg) => {
            return msg.channel.send("Provide a Spotify link plz " +spotify.toString());
     }
 
-    botstorage[msg.author.id] = link;
+    botstorage[msg.author.id] = "";
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 
     const successEmbed = new Discord.MessageEmbed()

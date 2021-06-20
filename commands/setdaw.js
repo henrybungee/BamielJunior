@@ -15,7 +15,7 @@ module.exports = (client, msg) => {
     let daw = args.slice(1).join(" ");
     if (!daw) {
         msg.channel.send("Got it, your DAW has been cleared.");
-        botstorage[msg.author.id] = null;
+        botstorage[msg.author.id] = "";
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 

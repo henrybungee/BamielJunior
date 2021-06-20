@@ -33,7 +33,7 @@ module.exports = (client, msg) => {
 
     directory = path.join(__dirname + '/../storage/spotify.json')
 
-    if (!botstorage[user.id]) {
+    if (!botstorage[user.id] || botstorage[user.id].length <= 0) {
         return msg.channel.send(user.user.username + " doesn't have a Spotify!");
     }
 

@@ -19,8 +19,8 @@ module.exports = (client, msg) => {
 
     if (!link) {
         msg.channel.send("Got it, your Soundcloud has been cleared.");        
-        botstorage[msg.author.id] = null;
-        return fs.writeFileSync(directory, JSON.stringify(botstorage));
+        botstorage[msg.author.id] = "";
+        return fs.writeFileSync(path.join(__dirname + '/../storage/soundcloud.json'), JSON.stringify(botstorage));
     }
 
     if (!link.startsWith("https://soundcloud.com/")) {

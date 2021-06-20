@@ -16,7 +16,7 @@ module.exports = (client, msg) => {
 
     if (!link) {
         msg.channel.send("Got it, your YouTube has been cleared.");        
-        botstorage[msg.author.id] = null;
+        botstorage[msg.author.id] = "";
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 

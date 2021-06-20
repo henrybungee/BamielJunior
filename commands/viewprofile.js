@@ -78,10 +78,10 @@ module.exports = (client, msg) => {
         .setTitle(nameBotstorage[user.id] ? nameBotstorage[user.id] : user.user.username)
         .setColor(colorBotstorage[user.id] ? colorBotstorage[user.id] : "#303030")
         .setThumbnail(user.user.displayAvatarURL({dynamic: true}))
-        .setTimestamp();
+        .setTimestamp()
+        .setDescription(descBotstorage[user.id] ? descBotstorage[user.id] : "No description set");
 
-    if(descBotstorage[user.id])
-        profile.setDescription(descBotstorage[user.id] ? descBotstorage[user.id] : "No description set")
+        
     if(dawsBotstorage[user.id])
         profile.addField("DAW:", dawsBotstorage[user.id])
     if(bcBotstorage[user.id])

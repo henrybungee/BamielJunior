@@ -34,7 +34,7 @@ module.exports = (client, msg) => {
 
     directory = path.join(__dirname + '/../storage/bandcamp.json')
 
-    if (!botstorage[user.id]) {
+    if (!botstorage[user.id] || botstorage[user.id].length <= 0) {
         if (user.user.username === "PRIZ ;]") {
             return msg.channel.send(priz.toString() + " " + user.user.username + " doesn't have a bandcamp setup yet!\n*He actually does:* https://przm.bandcamp.com/ ;]");
         }
