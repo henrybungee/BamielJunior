@@ -14,9 +14,13 @@ module.exports = (client, msg) => {
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let daw = args.slice(1).join(" ");
     if (!daw) {
-        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
-        botstorage[msg.author.id] = desc;
+        msg.channel.send("Got it, your DAW has been cleared.");
+        botstorage[msg.author.id] = null;
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
+    }
+
+    if (daw.length > 20) {
+        return msg.channel.send("You're DAW must be under **20** characters long!");
     }
 
     botstorage[msg.author.id] = daw;

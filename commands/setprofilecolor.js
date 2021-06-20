@@ -20,8 +20,8 @@ module.exports = (client, msg) => {
     if (!color.startsWith("#"))
         return msg.channel.send("Hex codes start with a `#`, bro. If you don't have one, it's not a hex. Please fix that.")
     else if(/^\#[A-Fa-f0-9]{3}$/.test(color))
-        color = "#" + color[1] + color[1] + color[2] + color[2] + color[3] + color[3]
-    else if(!/^\#[A-Fa-f0-9]{6}$/.test(color)
+        color = "#" + color[1] + color[1] + color[2] + color[2] + color[3] + color[3];
+    else if(!/^\#[A-Fa-f0-9]{6}$/.test(color))
         return msg.channel.send("That isn't valid, hex codes are in `#XXX` or `#XXXXXX` format, where `X` is any one of `abcdef0123456789`, case insensitive")
     botstorage[msg.author.id] = color.toLowerCase();
     fs.writeFileSync(directory, JSON.stringify(botstorage));

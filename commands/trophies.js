@@ -29,7 +29,7 @@ module.exports = (client, msg) => {
 
 
     switch(user.id) {
-        case "527523815660453889:
+        case "527523815660453889":
             profile.addField("🏆 Trophies (gifted by owner):", "⚙️ Bot Dev\n😎 Epic Person");
             break;
 

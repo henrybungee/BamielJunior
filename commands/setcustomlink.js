@@ -14,8 +14,8 @@ module.exports = (client, msg) => {
     let link = args[1];
 
     if (!link) {
-        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
-        botstorage[msg.author.id] = desc;
+        msg.channel.send("Got it, your custom link has been cleared.");
+        botstorage[msg.author.id] = null;
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 

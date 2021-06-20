@@ -16,6 +16,12 @@ module.exports = (client, msg) => {
     botstorage[msg.author.id] = favorite;
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 
+    if (!favorite) {
+        msg.channel.send("Got it, your favorite artist has been cleared.");
+        botstorage[msg.author.id] = null;
+        return fs.writeFileSync(directory, JSON.stringify(botstorage));
+    }
+
     if (favorite.length > 30) {
         return msg.channel.send("Your favorite artist's name is too long! Make sure it is under **30** characters long! If this is the actual artist's name, email a mod or the creator and we'll make an exception for you.");
     }

@@ -19,17 +19,13 @@ module.exports = (client, msg) => {
     }
 
     if (!linktree) {
-        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
-        botstorage[msg.author.id] = desc;
+        msg.channel.send("Got it, your Linktree has been cleared.");
+        botstorage[msg.author.id] = null;
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 
-    if (!linktree.startsWith('https://')) {
-        return msg.channel.send("That ain't a link, buddy.");
-    }
-
-    if (!findWord("linktr.ee", linktree)) {
-        return msg.channel.send("That ain't a linktree link :|");
+    if (!linktree.startsWith('https://linktr.ee')) {
+        return msg.channel.send("That ain't a linktr.ee link, buddy.");
     }
 
     botstorage[msg.author.id] = linktree;

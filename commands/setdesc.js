@@ -15,8 +15,8 @@ module.exports = (client, msg) => {
     let desc = args.slice(1).join(" ");
 
     if (!desc) {
-        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
-        botstorage[msg.author.id] = desc;
+        msg.channel.send("Got it, your description has been cleared.");
+        botstorage[msg.author.id] = null;
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 

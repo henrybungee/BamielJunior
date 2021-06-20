@@ -78,19 +78,24 @@ module.exports = (client, msg) => {
         .setTitle(nameBotstorage[user.id] ? nameBotstorage[user.id] : user.user.username)
         .setColor(colorBotstorage[user.id] ? colorBotstorage[user.id] : "#303030")
         .setThumbnail(user.user.displayAvatarURL({dynamic: true}))
+        .setTimestamp();
 
     if(descBotstorage[user.id])
         profile.setDescription(descBotstorage[user.id] ? descBotstorage[user.id] : "No description set")
     if(dawsBotstorage[user.id])
         profile.addField("DAW:", dawsBotstorage[user.id])
     if(bcBotstorage[user.id])
-        profile.addField(bandcampEmoji.toString() + " Bandcamp:", `[Click here](${bcBotstorage[user.id]})`
+        profile.addField(bandcampEmoji.toString() + " Bandcamp:", `[Click here](${bcBotstorage[user.id]})`)
     if(ytBotstorage[user.id])
-            .addField(yt.toString() + " Youtube:", ytBotstorage[user.id] ? `[Click here](${ytBotstorage[user.id]})` : "No Youtube")
-            .addField(scEmoji.toString() + " Soundcloud:", scBotstorage[user.id] ? `[Click here](${scBotstorage[user.id]})` : "No Soundcloud")
-            .addField(spotEmoji.toString() + " Spotify:", spotBotstorage[user.id] ? `[Click here](${spotBotstorage[user.id]})` : "No Spotify")
-            .addField("Linktree:", ltBotstorage[user.id] ? `[Click here](${ltBotstorage[user.id]})` : "No Linktree")
-            .setTimestamp();
+        profile.addField(yt.toString() + " Youtube:", ytBotstorage[user.id] ? `[Click here](${ytBotstorage[user.id]})` : "No Youtube");
+    if (scBotstorage[user.id])
+        profile.addField(scEmoji.toString() + " Soundcloud:", scBotstorage[user.id] ? `[Click here](${scBotstorage[user.id]})` : "No Soundcloud")
+    if (spotBotstorage[user.id])
+        profile.addField(spotEmoji.toString() + " Spotify:", spotBotstorage[user.id] ? `[Click here](${spotBotstorage[user.id]})` : "No Spotify")
+    if (ltBotstorage[user.id]) {
+        profile.addField("Linktree:", ltBotstorage[user.id] ? `[Click here](${ltBotstorage[user.id]})` : "No Linktree")
+    }
+
 
     if (clBotstorage[user.id]) {
         profile.addField("Custom Link:", `[Click here](${clBotstorage[user.id]})`);
@@ -102,7 +107,7 @@ module.exports = (client, msg) => {
 
     // Trophies
     switch(user.id) {
-        case "527523815660453889:
+        case "527523815660453889":
             profile.addField("🏆 Trophies (gifted by owner):", "⚙️ Bot Dev\n😎 Epic Person");
             break;
 

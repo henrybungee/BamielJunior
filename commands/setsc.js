@@ -18,8 +18,8 @@ module.exports = (client, msg) => {
     }
 
     if (!link) {
-        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
-        botstorage[msg.author.id] = desc;
+        msg.channel.send("Got it, your Soundcloud has been cleared.");        
+        botstorage[msg.author.id] = null;
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 

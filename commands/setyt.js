@@ -15,17 +15,20 @@ module.exports = (client, msg) => {
     let link = args[1];
 
     if (!link) {
-        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
-        botstorage[msg.author.id] = desc;
+        msg.channel.send("Got it, your YouTube has been cleared.");        
+        botstorage[msg.author.id] = null;
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 
-    if (!link.startsWith("https://www.youtube.com/channel/")) {
+    if (link.includes("watch?v=")) {
         msg.channel.send("Invalid YouTube channel link!");
         return;
     }
 
-
+    if (!link.startsWith("https://www.youtube.com/c")) {
+        msg.channel.send("Invalid YouTube channel link!");
+        return;
+    }
 
     botstorage[msg.author.id] = args[1];
     fs.writeFileSync(directory, JSON.stringify(botstorage));

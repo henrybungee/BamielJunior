@@ -18,14 +18,13 @@ module.exports = (client, msg) => {
     }
 
     if (!bcLink) {
-        msg.channel.send("Got it, it has been cleared. It was previously ```" + botstorage[msg.author.id] + "```in case this was an accident");
-        botstorage[msg.author.id] = desc;
+        msg.channel.send("Got it, your Bandcamp has been cleared.");        
+        botstorage[msg.author.id] = null;
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
-    }
 
-    if (!bcLink.startsWith("https://")) {
-        return msg.channel.send("Provide a valid link plz");
+    if (!bcLink.startsWith("https://") && !bcLink.endsWith(".bandcamp.com/")) {
+        return msg.channel.send("Provide a valid Bandcamp link plz");
     }
 
     //sanitization
