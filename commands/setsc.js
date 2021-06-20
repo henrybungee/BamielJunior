@@ -23,18 +23,8 @@ module.exports = (client, msg) => {
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 
-    if (!link.startsWith("https://")) {
+    if (!link.startsWith("https://soundcloud.com/")) {
         return msg.channel.send("Provide a valid link plz");
-    }
-
-    //sanitization
-    if (!link.startsWith("https://")) {
-        return msg.channel.send("Supply a link plz");
-    }
-
-
-    if (!findWord("soundcloud", link)) {
-        return msg.channel.send("Supply a soundcloud link plz");
     }
 
     directory = path.join(__dirname + '/../storage/soundcloud.json')

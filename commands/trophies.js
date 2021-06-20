@@ -16,10 +16,16 @@ module.exports = (client, msg) => {
     var user = msg.mentions.users.first();
 
     if (!user) {
-        user = msg.guild.members.cache.get(args[1]).user;
-        if (!user)
+        user = msg.guild.members.cache.get(args[1]);
+        if (!user) {
             user = msg.author;
+            if (user.user.bot) {
+                return msg.channel.send("Bots can't get trophies.");
+            }
+        }
     }
+
+    
 
     const profile = new Discord.MessageEmbed()
         .setTitle(user.username + "'s trophies")

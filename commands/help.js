@@ -12,9 +12,9 @@ ping - Bot's ping time
 trophies - View your trophies
 profile - View your profile
 report - Report someone's profile
-rchannel - View the channel where reports are sent **\***
-list - View blacklisted users **\***
-blacklist - Blacklist a user **\***
+rchannel - View the channel where reports are sent\*
+list - View blacklisted users \*
+blacklist - Blacklist a user \*
 feedback - Send feedback to the bot dev`)
         .addField("Setting Links:", `\
 setbc - Bandcamp

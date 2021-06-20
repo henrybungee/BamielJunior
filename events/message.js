@@ -120,7 +120,7 @@ module.exports = async (client, msg) => {
         case "setrchannel":
         case "setreportchannel":
         case "setreportingchannel":
-            reportchannel(client, msg);
+            setreportchannel(client, msg);
             break;
 
         case "setfav":
