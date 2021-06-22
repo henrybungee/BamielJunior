@@ -23,6 +23,10 @@ module.exports = (client, msg) => {
            return msg.channel.send("Provide a valid site on the internetz");
     }
 
+    if (link.length >= 100) {
+        return msg.channel.send("Your custom link has to be under **100** characters!");
+    }
+
     botstorage[msg.author.id] = link;
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 

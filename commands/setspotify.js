@@ -23,6 +23,10 @@ module.exports = (client, msg) => {
            return msg.channel.send("Provide a Spotify link plz " +spotify.toString());
     }
 
+    if (link.length >= 100) {
+        return msg.channel.send("Your Spotify link has to be under **100** characters!");
+    }
+
     botstorage[msg.author.id] = "";
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 

@@ -30,6 +30,10 @@ module.exports = (client, msg) => {
         return;
     }
 
+    if (bcLink.length >= 100) {
+        return msg.channel.send("Your Youtube link has to be under **100** characters!");
+    }
+
     botstorage[msg.author.id] = args[1];
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 

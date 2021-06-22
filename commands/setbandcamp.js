@@ -32,6 +32,10 @@ module.exports = (client, msg) => {
         return msg.channel.send("Looks like this isn't a bandcamp link smh");
     }
 
+    if (bcLink.length >= 100) {
+        return msg.channel.send("Your Bandcamp link has to be under **100** characters!");
+    }
+
     directory = path.join(__dirname + '/../storage/bandcamp.json')
 
     botstorage[msg.author.id] = bcLink;

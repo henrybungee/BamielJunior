@@ -28,6 +28,10 @@ module.exports = (client, msg) => {
         return msg.channel.send("That ain't a linktr.ee link, buddy.");
     }
 
+    if (bcLink.length >= 100) {
+        return msg.channel.send("Your linktr.ee link has to be under **100** characters!");
+    }
+
     botstorage[msg.author.id] = linktree;
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 

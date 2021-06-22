@@ -17,7 +17,7 @@ fs.readdir('./events/', (err, files) => {
   })
 })
 
-client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.eDqj_vhjLHeWD0Vd-Rk5_PvX_30');
+client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.0gHnG8JSkY6Wtz6W8D-N62fsoqg');
 
 //TODO LIST
 //#1: trophies command does something if you have trophies (DONE)

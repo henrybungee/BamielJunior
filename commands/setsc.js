@@ -27,6 +27,10 @@ module.exports = (client, msg) => {
         return msg.channel.send("Provide a valid link plz");
     }
 
+    if (link.length >= 100) {
+        return msg.channel.send("Your Soundcloud link has to be under **100** characters!");
+    }
+
     directory = path.join(__dirname + '/../storage/soundcloud.json')
 
     botstorage[msg.author.id] = link;
