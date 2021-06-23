@@ -180,7 +180,6 @@ module.exports = async (client, msg) => {
         case "blacklisted":
         case "listbanned":
         case "banlist":
-        case "bl":
             listbanned(client, msg);
             break;
 

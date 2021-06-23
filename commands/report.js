@@ -13,9 +13,9 @@ module.exports = (client, msg) => {
 
     let user = msg.guild.members.cache.get(userID) || msg.guild.members.cache.get(msg.mentions.members.first().id);
 
-        if (!user) {
-            return msg.channel.send("Supply a valid user or ping!");
-        }
+    if (!user) {
+        return msg.channel.send("Supply a valid user or ping!");
+    }
 
     if (user.user.bot) {
         return msg.channel.send("Bro bots don't have profiles, they can't do anything wrong");
