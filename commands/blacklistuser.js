@@ -6,9 +6,7 @@ module.exports = (client, msg) => {
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let userArg = args.slice(1).join(" ");
 
-    var user = msg.guild.members.cache.get(userArg);
-
-    var check = client.emojis.cache.find(emoji => emoji.name === "tommycheck");
+    var user = msg.guild.members.cache.get(userArg) || msg.mentions.members.first();
 
     if (!msg.member.hasPermission("ADMINISTRATOR")) {
         return msg.channel.send("You cannot perform this action. You don't have the `ADMINISTRATOR` permission.");
@@ -19,7 +17,7 @@ module.exports = (client, msg) => {
     }
 
     if (!user) {
-        return msg.channel.send("Use a valid user ID");
+        return msg.channel.send("Use a valid user ID or ping a user");
     }
 
     if (userArg === msg.author.id) {

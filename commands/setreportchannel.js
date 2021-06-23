@@ -12,7 +12,7 @@ module.exports = (client, msg) => {
         return msg.channel.send("✋ Stop right there. I can't let you do that.");
     }
 
-    if(channelID.toString().startswith("<#"))
+    if(String(channelID).startsWith("<#"))
         channelID = channelID.slice(2,-1); // <#123> --> 123
 
     if (!channelID) {
