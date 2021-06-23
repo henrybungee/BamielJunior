@@ -98,7 +98,7 @@ module.exports = (client, msg) => {
 
 
     if (clBotstorage[user.id]) {
-        profile.addField("Custom Link:", `[Click here](${clBotstorage[user.id]})`);
+        profile.addField(clBotstorage[user.id]["platform"], `[Click here](${clBotstorage[user.id]["link"]})`);
     }
 
     if (favBotstorage[user.id]) {

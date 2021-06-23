@@ -114,6 +114,7 @@ module.exports = async (client, msg) => {
 
         case "setcustom":
         case "setwebsite":
+        case "setcustomlink":
             setcustomlink(client, msg);
             break;
 
@@ -124,6 +125,8 @@ module.exports = async (client, msg) => {
             break;
 
         case "setfav":
+        case "setfavartist":
+        case "setfavoriteartist":
             setfav(client, msg);
             return
 
@@ -143,6 +146,7 @@ module.exports = async (client, msg) => {
             break;
 
         case "daw":
+        case "d":
             viewdaw(client, msg);
             break;
 
@@ -152,6 +156,7 @@ module.exports = async (client, msg) => {
             break;
 
         case "report":
+        case "r":
             report(client, msg);
             break;
 
@@ -161,6 +166,7 @@ module.exports = async (client, msg) => {
             break;
 
         case "trophies":
+        case "t":
             trophies(client, msg);
             break;
 
@@ -173,6 +179,8 @@ module.exports = async (client, msg) => {
         case "list":
         case "blacklisted":
         case "listbanned":
+        case "banlist":
+        case "bl":
             listbanned(client, msg);
             break;
 
@@ -182,6 +190,7 @@ module.exports = async (client, msg) => {
             break;
 
         case "blacklist":
+        case "b":
             blacklist(client, msg);
             break;
     }

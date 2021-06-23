@@ -11,7 +11,12 @@ module.exports = (client, msg) => {
     directory = path.join(__dirname + '/../storage/custom.json')
 
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
-    let link = args[1];
+    let linkPlatform = args[1];
+    let link = args[2];
+
+    if (!linkPlatform) {
+        platform = "Custom Link";
+    }
 
     if (!link) {
         msg.channel.send("Got it, your custom link has been cleared.");
@@ -27,7 +32,17 @@ module.exports = (client, msg) => {
         return msg.channel.send("Your custom link has to be under **100** characters!");
     }
 
-    botstorage[msg.author.id] = link;
+    if (linkPlatform.length > 30) {
+        return msg.channel.send("Your custom link platform has to be under **30** characters!");
+    }
+
+    if (linkPlatform.trim().length === 0) {
+        return msg.channel.send("Specify a link platform");
+    }
+
+    console.log(linkPlatform);
+
+    botstorage[msg.author.id] = { platform: linkPlatform, link: link};
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 
     const successEmbed = new Discord.MessageEmbed()
