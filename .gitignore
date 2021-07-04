@@ -1,5 +1,6 @@
 # Don't track content of these folders
-storage/
+/storage/
+/node_modules/
 
 # Compiled source #
 ###################
