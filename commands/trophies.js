@@ -12,13 +12,15 @@ module.exports = (client, msg) => {
 
     let prefix = "$";
 
+    let priz = client.emojis.cache.find(emoji => emoji.name === "priz");
+
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
-    var user = msg.mentions.users.first();
+    var user = msg.mentions.members.first();
 
     if (!user) {
         user = msg.guild.members.cache.get(args[1]);
         if (!user) {
-            user = msg.author;
+            user = msg.member;
         }
     }
 
@@ -31,7 +33,7 @@ module.exports = (client, msg) => {
     }
 
     const profile = new Discord.MessageEmbed()
-        .setTitle(user.username + "'s trophies")
+        .setTitle(user.user.username + "'s trophies")
         .setColor("#ede76b")
         .setDescription("Here are the trophies you recieved from the creator (lucky you):")
         .setTimestamp();

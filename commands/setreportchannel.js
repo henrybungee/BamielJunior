@@ -32,7 +32,7 @@ module.exports = (client, msg) => {
 
     const successEmbed = new Discord.MessageEmbed()
         .setTitle("Report Channel Successfully Set!")
-        .setColor("#fc4103")
+        .setColor("#8dff6e")
         .setDescription("📣 The report channel has been successfully set to `#" +channel.name+ "`!")
         .setFooter("All user reports will go here!")
         .setTimestamp();

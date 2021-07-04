@@ -39,7 +39,14 @@ module.exports = (client, msg) => {
                             });
                         });
 
-                        msg.channel.send("I'll blacklist **" + user.user.tag + "**. This will not allow them to use the bot or to interact with anyone else with the bot. Their profile will also be inaccessible.");
+                        const success = new Discord.MessageEmbed()
+                            .setTitle("Blacklist successful")
+                            .setColor("#8dff6e")
+                            .setAuthor(user.user.username + " blacklisted!", user.user.displayAvatarURL({dynamic:true}))
+                            .setDescription("I will blacklist user " +user.user.tag + ". \nThey will not be able to use me in any way.\nTheir profile cannot be viewed now.")
+                            .setTimestamp();
+
+                        msg.channel.send(success);
                         reactMessage.delete();
                     } else {
                         msg.channel.send('I will not blacklist this user.');
