@@ -50,7 +50,7 @@ module.exports = async (client, msg) => {
     const profileEmbed = new Discord.MessageEmbed()
         .setTitle(nameBotstorage[userId] || user.username)
         .setColor(colorBotstorage[userId] || '#303030')
-        .setThumbnail(user.user.displayAvatarURL({dynamic: true}))
+        .setThumbnail(user.displayAvatarURL({dynamic: true}))
         .setTimestamp()
         .setDescription(descBotstorage[userId] || 'No description set');
 
