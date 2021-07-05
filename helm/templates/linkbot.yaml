@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: linkbot-secret
+type: Opaque
+data:
+  bot-token: {{ .Values.linkbot.botToken | b64enc | quote }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: linkbot
+spec:
+  serviceName: linkbot-svc
+  selector:
+    matchLabels:
+      app: linkbot
+  template:
+    metadata:
+      labels:
+        app: linkbot
+    spec:
+      {{- if .Values.dockerconfig }}
+      imagePullSecrets:
+        - name: regcred
+      {{- end }}
+      containers:
+        - name: linkbot
+          image: {{ .Values.linkbot.image | quote }}
+          env:
+            - name: BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: linkbot-secret
+                  key: bot-token
+          volumeMounts:
+            - name: linkbot-data-pvc
+              mountPath: /app/storage
+  volumeClaimTemplates:
+    - metadata:
+        name: linkbot-data-pvc
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1
+---
+# Note: This service does nothing, it's only here because k8s won't let you have a statefulset without a (headless) service
+apiVersion: v1
+kind: Service
+metadata:
+  name: linkbot-svc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 12345

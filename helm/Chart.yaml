@@ -1,0 +1,4 @@
+apiVersion: v1
+name: linkbot
+version: 0.1.0-20210704
+description: A Discord bot

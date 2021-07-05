@@ -1,0 +1,50 @@
+# These are the persistent volumes manually created; here for reference and not part of any automation.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: linkbot-data-dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 1
+  claimRef:
+    name: linkbot-data-pvc
+    namespace: linkbot-dev
+  local:
+    path: /var/opt/linkbot/data-dev
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - stuccoserver
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: linkbot-data-prod
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 1
+  claimRef:
+    name: linkbot-data-pvc
+    namespace: linkbot-prod
+  local:
+    path: /var/opt/linkbot/data-prod
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - stuccoserver
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem

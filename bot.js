@@ -10,14 +10,16 @@ const fs = require('fs');
 
 fs.readdir('./events/', (err, files) => {
   files.forEach(file => {
-    const eventHandler = require(`./events/${file}`)
-    const eventName = file.split('.')[0]
+    const eventHandler = require(`./events/${file}`);
+    const eventName = file.split('.')[0];
 
     client.on(eventName, arg => eventHandler(client, arg));
   })
 })
 
-client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.N-70698AozOWQ-FSfd9K-F9H8qw');
+const botToken = process.env.BOT_TOKEN;
+
+client.login(botToken);
 
 //TODO LIST
 //#1: trophies command does something if you have trophies (DONE)

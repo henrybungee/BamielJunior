@@ -1,0 +1,11 @@
+/.git/**/*
+/helm/**/*
+
+/.dockerignore
+/.gitignore
+/.gitlab-ci.yml
+/README.md
+
+/storage/**/*
+/node_modules/**/*
+/yarn-error.log

@@ -1,0 +1,9 @@
+{{ with .Values.dockerconfig -}}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: regcred
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: {{ printf "{\"auths\":{\"%v\":{\"username\":\"%v\",\"password\":\"%v\"} } }" .registry .username .password | b64enc }}
+{{ end -}}

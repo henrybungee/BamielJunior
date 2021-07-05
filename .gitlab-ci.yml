@@ -1,0 +1,48 @@
+stages:
+  - build
+  - deploy
+
+.common-build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+
+build:
+  extends:
+    - .common-build
+  only:
+    - master
+  script:
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE/linkbot:$CI_COMMIT_SHA
+
+deploy-dev:
+  stage: deploy
+  # tag 3.1.0 on 2020/02/24
+  image: dtzar/helm-kubectl@sha256:0902e625da81dd533508e1b5ae7183180ec952f12b5990754657d9cd7374e1b3
+  only:
+    - master
+  script:
+    - mkdir ~/.kube && echo -n "$KUBECONFIG_DEV" | base64 -d > ~/.kube/config
+    - >
+      helm upgrade linkbot helm/ --install --namespace linkbot-dev
+      --set-string dockerconfig.registry=$CI_REGISTRY --set-string dockerconfig.username=$CI_DEPLOY_USER --set-string dockerconfig.password=$CI_DEPLOY_PASSWORD
+      --set-string linkbot.image=$CI_REGISTRY_IMAGE/linkbot:$CI_COMMIT_SHA
+      --set-string linkbot.botToken=$BOT_TOKEN_DEV
+
+deploy-prod:
+  stage: deploy
+  # tag 3.1.0 on 2020/02/24
+  image: dtzar/helm-kubectl@sha256:0902e625da81dd533508e1b5ae7183180ec952f12b5990754657d9cd7374e1b3
+  only:
+    - master
+  when: manual
+  script:
+    - mkdir ~/.kube && echo -n "$KUBECONFIG_PROD" | base64 -d > ~/.kube/config
+    - >
+      helm upgrade linkbot helm/ --install --namespace linkbot-prod
+      --set-string dockerconfig.registry=$CI_REGISTRY --set-string dockerconfig.username=$CI_DEPLOY_USER --set-string dockerconfig.password=$CI_DEPLOY_PASSWORD
+      --set-string linkbot.image=$CI_REGISTRY_IMAGE/linkbot:$CI_COMMIT_SHA
+      --set-string linkbot.botToken=$BOT_TOKEN_PROD
