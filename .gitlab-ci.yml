@@ -31,6 +31,7 @@ deploy-dev:
       --set-string dockerconfig.registry=$CI_REGISTRY --set-string dockerconfig.username=$CI_DEPLOY_USER --set-string dockerconfig.password=$CI_DEPLOY_PASSWORD
       --set-string linkbot.image=$CI_REGISTRY_IMAGE/linkbot:$CI_COMMIT_SHA
       --set-string linkbot.botToken=$BOT_TOKEN_DEV
+      --set-string linkbot.pvName=linkbot-data-dev
 
 deploy-prod:
   stage: deploy
@@ -46,3 +47,4 @@ deploy-prod:
       --set-string dockerconfig.registry=$CI_REGISTRY --set-string dockerconfig.username=$CI_DEPLOY_USER --set-string dockerconfig.password=$CI_DEPLOY_PASSWORD
       --set-string linkbot.image=$CI_REGISTRY_IMAGE/linkbot:$CI_COMMIT_SHA
       --set-string linkbot.botToken=$BOT_TOKEN_PROD
+      --set-string linkbot.pvName=linkbot-data-prod

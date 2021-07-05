@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 1
   claimRef:
-    name: linkbot-data-pvc
+    name: linkbot-data-pvc-linkbot-0
     namespace: linkbot-dev
   local:
     path: /var/opt/linkbot/data-dev
@@ -34,7 +34,7 @@ spec:
   capacity:
     storage: 1
   claimRef:
-    name: linkbot-data-pvc
+    name: linkbot-data-pvc-linkbot-0
     namespace: linkbot-prod
   local:
     path: /var/opt/linkbot/data-prod

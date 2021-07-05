@@ -45,6 +45,7 @@ spec:
         resources:
           requests:
             storage: 1
+        volumeName: {{ .Values.linkbot.pvName | quote }}
 ---
 # Note: This service does nothing, it's only here because k8s won't let you have a statefulset without a (headless) service
 apiVersion: v1
