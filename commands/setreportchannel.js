@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const path = require('path');
 const botstorage = require(path.join(__dirname + '/../storage/reportchannel.json'));
 const fs = require('fs');
 
