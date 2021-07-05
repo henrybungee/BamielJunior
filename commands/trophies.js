@@ -42,7 +42,7 @@ const trophiesByUserId = (() => {
 const trophyStringsByUserId = Object.entries(trophiesByUserId).reduce(
     (acc, [id, trophies]) => { acc[id] = trophies.join('\n'); return acc; }, {});
 
-const getUserTrophies = (userId) => trophiesByUserId[userId];
+const getUserTrophies = (userId) => trophiesByUserId[userId] || [];
 
 const addUserTrophiesEmbedField = (embed, userId) => {
     embed.addField('🏆 Trophies:', trophyStringsByUserId[userId] || '(no trophies)');

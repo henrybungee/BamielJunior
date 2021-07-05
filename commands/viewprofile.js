@@ -24,9 +24,9 @@ module.exports = async (client, msg) => {
     let user;
     try {
         if (userMention) {
-            user = client.users.fetch(userMention.id);
+            user = await client.users.fetch(userMention.id);
         } else if (args[1]) {
-            user = client.users.fetch(args[1]);
+            user = await client.users.fetch(args[1]);
         } else {
             user = authorUser;
         }
