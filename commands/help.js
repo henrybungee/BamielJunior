@@ -5,7 +5,7 @@ module.exports = (client, msg) => {
         .setTitle("👋 Hi! I'm LinkBot!")
         .setAuthor("Requested by " +msg.author.tag, msg.author.displayAvatarURL({dyanmic:true}))
         .setColor("#fff170")
-        .setDescription("But people here just call me Bamiel Junior. \nHere are my commands. My prefix is: `$`")
+        .setDescription("Here are my commands. My prefix is: `$`")
         .addField("Basics:", `\
 help - This command!
 ping - Bot's ping time

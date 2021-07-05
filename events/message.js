@@ -1,6 +1,3 @@
-const Discord = require('discord.js');
-const fs = require('fs');
-const readline = require('readline');
 const ping = require('../commands/ping');
 const setbandcamp = require('../commands/setbandcamp');
 const viewbc = require('../commands/viewbc');
@@ -29,168 +26,158 @@ const listbanned = require('../commands/listbanned');
 const feedback = require('../commands/featurerecommend');
 
 module.exports = async (client, msg) => {
+    const cmdPrefix = '$';
+    if (!msg.content.startsWith(cmdPrefix)) {
+        return;
+    }
 
-	let prefix = "$";
-	let userBlacklisted = false;
+    const { channel, author: authorUser } = msg;
 
-	//blacklist stuff
-	let dir = './blacklist.txt';
+    if ((await blacklist.getBlacklistedUserIds()).indexOf(authorUser.id) >= 0) {
+        await channel.send('You are blacklisted from using me!');
+        return;
+    }
 
-	if (msg.content.startsWith(prefix)) {
-		fs.readFileSync(dir, 'utf-8').split(/\r?\n/).forEach(function(line){
-			if (msg.author.id === line) {
-				userBlacklisted = true
-				return msg.channel.send("You are blacklisted from using me!");
-			}
-		});
-	}
+    if (channel.type === 'dm' && !authorUser.bot) {
+        await channel.send("I don't work in DMs! Use me in a server.");
+        return;
+    }
 
-	if (msg.content.toLowerCase().includes("among us")) {
-		msg.channel.send("sussy");
-	}
-
-	if (msg.channel.type === 'dm' && !msg.author.bot) {
-		return msg.channel.send("I don't work in DMs! Use me in a server.")
-	}
-
-	if(userBlacklisted)
-        return
-
-    switch(msg.content.split(" ")[0].split(prefix)[1]) {
-        case "ping":
+    switch (msg.content.split(/\s+/, 1)[0].slice(cmdPrefix.length)) {
+        case 'ping':
             ping(client, msg);
             break;
 
-        case "setbc":
-        case "setbandcamp": // Easy aliases
+        case 'setbc':
+        case 'setbandcamp': // Easy aliases
             setbandcamp(client, msg);
             break;
 
-        case "setyt":
-        case "setyoutube":
+        case 'setyt':
+        case 'setyoutube':
             setyt(client, msg);
             break;
 
-        case "setname":
+        case 'setname':
             setname(client, msg);
             break;
 
-        case "profile":
-        case "p":
-            viewprofile(client, msg);
+        case 'profile':
+        case 'p':
+            await viewprofile(client, msg);
             break;
 
-        case "setd":
-        case "setdesc":
-        case "setdescription":
-        case "setbio":
+        case 'setd':
+        case 'setdesc':
+        case 'setdescription':
+        case 'setbio':
             setdesc(client, msg);
             break;
 
-        case "setdaw":
+        case 'setdaw':
             setdaw(client, msg);
             break;
 
-        case "setsc":
-        case "setsoundcloud":
-        case "setscloud":
+        case 'setsc':
+        case 'setsoundcloud':
+        case 'setscloud':
             setsc(client, msg);
             break;
 
-        case "setcolor":
-        case "sethex":
+        case 'setcolor':
+        case 'sethex':
             setprofilecolor(client, msg);
             break;
 
-        case "setlt":
-        case "setlinktree":
+        case 'setlt':
+        case 'setlinktree':
             settreelink(client, msg);
             break;
 
-        case "setsp":
-        case "setspotify":
+        case 'setsp':
+        case 'setspotify':
             setspotify(client, msg);
             break;
 
-        case "setcustom":
-        case "setwebsite":
-        case "setcustomlink":
+        case 'setcustom':
+        case 'setwebsite':
+        case 'setcustomlink':
             setcustomlink(client, msg);
             break;
 
-        case "setrchannel":
-        case "setreportchannel":
-        case "setreportingchannel":
+        case 'setrchannel':
+        case 'setreportchannel':
+        case 'setreportingchannel':
             setreportchannel(client, msg);
             break;
 
-        case "setfav":
-        case "setfavartist":
-        case "setfavoriteartist":
+        case 'setfav':
+        case 'setfavartist':
+        case 'setfavoriteartist':
             setfav(client, msg);
-            return
+            break;
 
-        case "?":
-        case "help":
+        case '?':
+        case 'help':
             help(client, msg);
             break;
 
-        case "bc":
-        case "bandcamp":
+        case 'bc':
+        case 'bandcamp':
             viewbc(client, msg);
             break;
 
-        case "yt":
-        case "youtube":
+        case 'yt':
+        case 'youtube':
             viewyt(client, msg);
             break;
 
-        case "daw":
-        case "d":
+        case 'daw':
+        case 'd':
             viewdaw(client, msg);
             break;
 
-        case "sc":
-        case "soundcloud":
+        case 'sc':
+        case 'soundcloud':
             viewsc(client, msg);
             break;
 
-        case "report":
-        case "r":
+        case 'report':
+        case 'r':
             report(client, msg);
             break;
 
-        case "sp":
-        case "spotify":
+        case 'sp':
+        case 'spotify':
             viewspotify(client, msg);
             break;
 
-        case "trophies":
-        case "t":
-            trophies(client, msg);
+        case 'trophies':
+        case 't':
+            await trophies.trophiesCmd(client, msg);
             break;
 
-        case "rchannel":
-        case "reportchannel":
-        case "reportingchannel":
+        case 'rchannel':
+        case 'reportchannel':
+        case 'reportingchannel':
             reportchannel(client, msg);
             break;
 
-        case "list":
-        case "blacklisted":
-        case "listbanned":
-        case "banlist":
-            listbanned(client, msg);
+        case 'list':
+        case 'blacklisted':
+        case 'listbanned':
+        case 'banlist':
+            await listbanned(client, msg);
             break;
 
-        case "feedback":
-        case "feature":
-            feedback(client, msg);
+        case 'feedback':
+        case 'feature':
+            await feedback(client, msg);
             break;
 
-        case "blacklist":
-        case "b":
-            blacklist(client, msg);
+        case 'blacklist':
+        case 'b':
+            await blacklist.blacklistCmd(client, msg);
             break;
     }
-}
+};

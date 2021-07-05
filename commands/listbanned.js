@@ -1,43 +1,36 @@
 const Discord = require('discord.js');
-const fs = require('fs');
+const blacklist = require('./blacklistuser');
 
-module.exports = (client, msg) => {
+module.exports = async (client, msg) => {
+    const { channel, author: authorUser, member: authorMember } = msg;
+
+    if (!authorMember.hasPermission('ADMINISTRATOR')) {
+        await channel.send("You need the `ADMINISTRATOR` permission to use this command.\n\n**Why?** This command doesn't exist to shame people. Admins are the most trusted people in this server so we know they'll use this information in a positive way.");
+        return;
+    }
+
+    const blacklistedUserIds = await blacklist.getBlacklistedUserIds();
+    if (blacklistedUserIds.length === 0) {
+        await authorUser.send('Nobody is blacklisted!');
+        return;
+    }
     const blacklistEmbed = new Discord.MessageEmbed()
-        .setTitle("Blacklisted Users")
-        .setColor("#eb2a23")
-        .setAuthor("Requested by " +msg.author.username, msg.author.displayAvatarURL({dynamic: true}))
-        .setDescription("This is a list of the blacklisted users!   \nThey are not able to use to bot in any form.");
-
-    var text = fs.readFileSync('./blacklist.txt', 'utf-8');
-
-    if (!msg.member.hasPermission("ADMINISTRATOR")) {
-        return msg.channel.send("You need the `ADMINISTRATOR` permission to use this command. \n\n**Why?** This command doesn't exist to shame people. Admins are the most trusted people in this server so we know they'll use this information in a positive way.");
+        .setTitle('Blacklisted Users')
+        .setColor('#eb2a23')
+        .setAuthor('Requested by ' + authorUser.username, authorUser.displayAvatarURL({dynamic: true}))
+        .setDescription('This is a list of the blacklisted users!\nThey are not able to use to bot in any form.');
+    const blacklistedUserPromises = blacklistedUserIds
+        .map(id => client.users.fetch(id));
+    for (let i = 0; i < blacklistedUserPromises.length; i++) {
+        const user = await blacklistedUserPromises[i];
+        const id = blacklistedUserIds[i];
+        if (user) {
+            blacklistEmbed.addField(user.username, `has been blacklisted (user ID ${id})`);
+        } else {
+            console.log(`Note: no user found for blacklisted ID ${id}`);
+            blacklistEmbed.addField(id, 'has been blacklisted (user ID shown)');
+        }
     }
 
-    function lineCount( text ) {
-        var nLines = 0;
-        for( var i = 0, n = text.length;  i < n;  ++i ) {
-            if( text[i] === '\n' ) {
-                ++nLines;
-            }
-        }
-        return nLines;
-    }
-
-    if (lineCount(text) < 1) {
-        console.log("no blacklist");
-        return msg.channel.send("Nobody is blacklisted!");
-    }
-
-    fs.readFileSync('./blacklist.txt', 'utf-8').split(/\r?\n/).forEach(function(line){
-        var user = msg.guild.members.cache.get(line);
-        if (!user) {
-            console.log("not a user");
-        }
-        else if (user) {
-            blacklistEmbed.addField(user.user.username, "has been blacklisted");
-        }
-    });
-
-    msg.author.send(blacklistEmbed);
-}
+    authorUser.send(blacklistEmbed);
+};

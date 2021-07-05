@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-path = require('path');
+const path = require('path');
 const botstorage = require(path.join(__dirname + '/../storage/names.json')); // path may vary
 const fs = require('fs');
 
