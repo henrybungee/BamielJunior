@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const validUrl = require('valid-url');
 const path = require('path');
 const botstorage = require(path.join(__dirname + '/../storage/bandcamp.json')); // path may vary
 const fs = require('fs');
@@ -18,18 +19,34 @@ module.exports = (client, msg) => {
     }
 
     if (!bcLink) {
+        const improperUsage = new Discord.MessageEmbed()
+            .setTitle("How to use Set Bandcamp")
+            .setColor("#ed411f")
+            .setDescription("Use this command to set your Bandcamp link\n through the bot. It will appear on your profile\n and will be accesible to all users via the $bc command.")
+            .addField("Example Usage:", "$setbc https://c418.bandcamp.com/")
+            .setTimestamp();
+
+        return msg.channel.send(improperUsage);
+    }
+
+    if (bcLink.toLowerCase() === "--clear") {
         msg.channel.send("Got it, your Bandcamp has been cleared.");        
         botstorage[msg.author.id] = "";
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 
-    if (!bcLink.startsWith("https://") && !bcLink.endsWith(".bandcamp.com/")) {
+    if (!validUrl.isUri(bcLink)) {
+        return msg.channel.send("Provide a valid site on the internet!");
+    }
+
+    if (!bcLink.endsWith(".bandcamp.com") && !bcLink.endsWith(".bandcamp.com/")) {
+        console.log("for some reason it didnt end with bandcamp.com")
         return msg.channel.send("Provide a valid Bandcamp link plz");
     }
 
     //sanitization
-    if (!findWord("bandcamp", bcLink)) {
-        return msg.channel.send("Looks like this isn't a bandcamp link smh");
+    if (bcLink.includes("?sneaky=")) {
+        return msg.channel.send("No sneaky YouTube links!");
     }
 
     if (bcLink.length >= 100) {

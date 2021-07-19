@@ -53,7 +53,7 @@ const trophiesCmd = async (client, msg) => {
 
     const prefix = '$';
     const args = msg.content.slice(prefix.length).trim().split(/\s+/);
-    const user = msg.mentions.users.first() || await client.users.fetch(args[1]) || authorUser;
+    const user = msg.mentions.users.first() || await client.users.cache.get(args[1]) || authorUser;
 
     if (user.id === '851569621106032651') {
         await channel.send('I have all the trophies :sunglasses:');
@@ -65,8 +65,9 @@ const trophiesCmd = async (client, msg) => {
         return;
     }
 
-    const responseEmbed = new Discord.MessageEmbed()
+    const responseEmbed = new Discord.MessageEmbed();
     const trophies = getUserTrophies(user.id);
+
     if (trophies.length > 0) {
         responseEmbed
             .setTitle(user.username + "'s trophies")
@@ -74,7 +75,9 @@ const trophiesCmd = async (client, msg) => {
             .setDescription('Here are the trophies you recieved from the creator (lucky you):')
             .setTimestamp();
         addUserTrophiesEmbedField(responseEmbed, user.id);
-    } else {
+    } 
+    
+    else if (trophies.length <= 0) {
         responseEmbed
             .setTitle('Trophies 🏆')
             .setColor('#ede76b')
@@ -83,33 +86,33 @@ const trophiesCmd = async (client, msg) => {
             .setTimestamp();
     }
 
-    switch(user.id) {
-        case '527523815660453889':
-            responseEmbed.addField('🏆 Trophies (gifted by owner):', "⚙️ Bot Dev\n😎 Epic Person");
-            break;
+    // switch(user.id) {
+    //     case '527523815660453889':
+    //         responseEmbed.addField('🏆 Trophies (gifted by owner):', "⚙️ Bot Dev\n😎 Epic Person");
+    //         break;
 
-        case '481591703959240706':
-            responseEmbed.addField('🏆 Trophies (gifted by owner):', "<:priz:851844756488585266> PRIZ ;]\n💻 Coder Man");
-            break;
+    //     case '481591703959240706':
+    //         responseEmbed.addField('🏆 Trophies (gifted by owner):', "<:priz:851844756488585266> PRIZ ;]\n💻 Coder Man");
+    //         break;
 
-        case '271045041487740940':
-            responseEmbed.addField('🏆 Trophies (gifted by owner):', "⚙️ Early Tester\n💠 Cool Dude v2");
-            break;
+    //     case '271045041487740940':
+    //         responseEmbed.addField('🏆 Trophies (gifted by owner):', "⚙️ Early Tester\n💠 Cool Dude v2");
+    //         break;
 
-        case '235833960364638219':
-            responseEmbed.addField('🏆 Trophies (gifted by owner):', "⚙️ Early Tester");
-            break;
+    //     case '235833960364638219':
+    //         responseEmbed.addField('🏆 Trophies (gifted by owner):', "⚙️ Early Tester");
+    //         break;
 
-        case '743256356533960754':
-            responseEmbed.addField('🏆 Trophies (gifted by owner):', "⚙️ Early Tester\n💛 Big Pee");
-            break;
+    //     case '743256356533960754':
+    //         responseEmbed.addField('🏆 Trophies (gifted by owner):', "⚙️ Early Tester\n💛 Big Pee");
+    //         break;
 
-        default:
-            // the user does not have any trophies
-            return channel.send(noTrophiesEmbed);
-    }
+    //     default:
+    //         // the user does not have any trophies
+    //         return channel.send(noTrophiesEmbed);
+    // }
 
-    channel.send(responseEmbed);
+    msg.channel.send({embed: responseEmbed});
 };
 
 module.exports = {

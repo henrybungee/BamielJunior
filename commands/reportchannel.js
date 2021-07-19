@@ -15,6 +15,6 @@ module.exports = (client, msg) => {
         return msg.channel.send("This server doesn't have a report channel, please set one!")
     }
 
-    msg.channel.send("📣 The report channel for " +msg.guild.name+ " is `#" +channel.name+ "`");
+    msg.channel.send("📣 The report channel is <#" +channel.id+ ">");
 
 }

@@ -15,6 +15,17 @@ module.exports = (client, msg) => {
     let desc = args.slice(1).join(" ");
 
     if (!desc) {
+        const improperUsage = new Discord.MessageEmbed()
+            .setTitle("How to use Set Description")
+            .setColor("#ed411f")
+            .setDescription("Use this command to set your description\n through the bot. It will appear on your profile.\nYou can use this command to let others know a little\nbit about you.")
+            .addField("Example Usage:", "$setd hi there!")
+            .setTimestamp();
+
+        return msg.channel.send(improperUsage);
+    }
+
+    if (desc.toLowerCase() === "--clear") {
         msg.channel.send("Got it, your description has been cleared.");
         botstorage[msg.author.id] = "";
         return fs.writeFileSync(directory, JSON.stringify(botstorage));

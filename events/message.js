@@ -26,7 +26,7 @@ const listbanned = require('../commands/listbanned');
 const feedback = require('../commands/featurerecommend');
 
 module.exports = async (client, msg) => {
-    const cmdPrefix = '$';
+    const cmdPrefix = '!';
     if (!msg.content.startsWith(cmdPrefix)) {
         return;
     }

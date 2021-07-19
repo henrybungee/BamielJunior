@@ -12,12 +12,13 @@ module.exports = (client, msg) => {
 
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let color = args.slice(1).join(" ");
+
     if (!color) {
         return msg.channel.send('🎨 Please specify a color. Use hex colors only! Leave your color as `#ffffff` for the default embed color.');
     }
 
     if (!color.startsWith("#"))
-        return msg.channel.send("Hex codes start with a `#`, bro. If you don't have one, it's not a hex. Please fix that.")
+        color = "#" + color;
     else if(/^\#[A-Fa-f0-9]{3}$/.test(color))
         color = "#" + color[1] + color[1] + color[2] + color[2] + color[3] + color[3];
     else if(!/^\#[A-Fa-f0-9]{6}$/.test(color))

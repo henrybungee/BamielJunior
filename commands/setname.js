@@ -13,7 +13,7 @@ module.exports = (client, msg) => {
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let name = args.slice(1).join(" ");
 
-    if (!name) {
+    if (name.toLowerCase() === "--clear") {
         msg.channel.send("Got it, your artist/moniker has been cleared.");
         botstorage[msg.author.id] = "";
         return fs.writeFileSync(directory, JSON.stringify(botstorage));

@@ -1,6 +1,7 @@
 const path = require('path');
 const botstorage = require(path.join(__dirname + '/../storage/daws.json')); // path may vary
 const fs = require('fs');
+const Discord = require('discord.js');
 
 module.exports = (client, msg) => {
     //testing a change
@@ -12,7 +13,19 @@ module.exports = (client, msg) => {
 
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let daw = args.slice(1).join(" ");
+
     if (!daw) {
+        const improperUsage = new Discord.MessageEmbed()
+            .setTitle("How to use Set DAW")
+            .setColor("#ed411f")
+            .setDescription("Use this command to set your digital audio workstation\n through the bot. It will appear on your profile.\nYou can use this command to let others know how you make\n your music.")
+            .addField("Example Usage:", "$setdaw Ableton Live\n$setdaw Ableton Live, FL Studio 20")
+            .setTimestamp();
+
+        return msg.channel.send(improperUsage);
+    }
+
+    if (daw.toLowerCase() === "--clear") {
         msg.channel.send("Got it, your DAW has been cleared.");
         botstorage[msg.author.id] = "";
         return fs.writeFileSync(directory, JSON.stringify(botstorage));

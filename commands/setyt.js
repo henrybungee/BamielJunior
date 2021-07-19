@@ -14,7 +14,7 @@ module.exports = (client, msg) => {
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let link = args[1];
 
-    if (!link) {
+    if (link.toLowerCase() === "--clear") {
         msg.channel.send("Got it, your YouTube has been cleared.");        
         botstorage[msg.author.id] = "";
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
@@ -25,12 +25,12 @@ module.exports = (client, msg) => {
         return;
     }
 
-    if (!link.startsWith("https://www.youtube.com/c")) {
+    if (!link.startsWith("https://www.youtube.com/c") &&  !link.startsWith("https://www.youtube.com/user/")) {
         msg.channel.send("Invalid YouTube channel link!");
         return;
     }
 
-    if (bcLink.length >= 100) {
+    if (link.length >= 100) {
         return msg.channel.send("Your Youtube link has to be under **100** characters!");
     }
 

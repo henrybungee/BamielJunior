@@ -11,10 +11,19 @@ module.exports = (client, msg) => {
 
     let check = client.emojis.cache.find(emoji => emoji.name === "tommycheck");
 
-    let user = msg.guild.members.cache.get(userID) || msg.guild.members.cache.get(msg.mentions.members.first().id);
+    let user = msg.guild.members.cache.get(userID);
+
+    const improperUsage = new Discord.MessageEmbed()
+        .setTitle("How to use Report")
+        .setColor("#ed411f")
+        .setDescription("Use this command to report a user for any suspicious\n behavior used with the bot.")
+        .addField("Example Usage:", "$report 527523815660453889 innapropriate link")
+        .setTimestamp();
+
+    console.log(user);
 
     if (!user) {
-        return msg.channel.send("Supply a valid user or ping!");
+        return msg.channel.send(improperUsage);
     }
 
     if (user.user.bot) {

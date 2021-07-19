@@ -14,6 +14,17 @@ module.exports = (client, msg) => {
     let link = args[1];
 
     if (!link) {
+        const improperUsage = new Discord.MessageEmbed()
+            .setTitle("How to use Set Spotify")
+            .setColor("#ed411f")
+            .setDescription("Use this command to set your Spotify\n through the bot. It will appear on your profile.")
+            .addField("Example Usage:", "$setsp https://open.spotify.com/artist/4uFZsG1vXrPcvnZ4iSQyrx")
+            .setTimestamp();
+
+        return msg.channel.send(improperUsage);
+    }
+
+    if (link.toLowerCase() === "--clear") {
         msg.channel.send("Got it, your Spotify has been cleared.");
         botstorage[msg.author.id] = null;
         return fs.writeFileSync(directory, JSON.stringify(botstorage));

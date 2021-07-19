@@ -16,7 +16,7 @@ module.exports = (client, msg) => {
     botstorage[msg.author.id] = favorite;
     fs.writeFileSync(directory, JSON.stringify(botstorage));
 
-    if (!favorite) {
+    if (favorite.toLowerCase() === "--clear") {
         msg.channel.send("Got it, your favorite artist has been cleared.");
         botstorage[msg.author.id] = "";
         return fs.writeFileSync(directory, JSON.stringify(botstorage));

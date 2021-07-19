@@ -11,21 +11,32 @@ module.exports = (client, msg) => {
     directory = path.join(__dirname + '/../storage/custom.json')
 
     var args = msg.content.slice(prefix.length).trim().split(/ +/g);
-    let linkPlatform = args[1];
-    let link = args[2];
+    let linkPlatform = args[2];
+    let link = args[1];
 
     if (!linkPlatform) {
         platform = "Custom Link";
     }
 
     if (!link) {
-        msg.channel.send("Got it, your custom link has been cleared.");
+        const improperUsage = new Discord.MessageEmbed()
+            .setTitle("How to use Set Custom Link")
+            .setColor("#ed411f")
+            .setDescription("Use this command to set your custom link\n through the bot. It will appear on your profile.\nYou can use this command to promote your website or Twitter.")
+            .addField("Example Usage:", "$setcustom https://github.com/user GitHub")
+            .setTimestamp();
+
+        return msg.channel.send(improperUsage);
+    }
+
+    if (link.toLowerCase() === "--clear") {
+        msg.channel.send("Got it, your Bandcamp has been cleared.");        
         botstorage[msg.author.id] = "";
         return fs.writeFileSync(directory, JSON.stringify(botstorage));
     }
 
-    if (!link.startsWith('https://')) {
-           return msg.channel.send("Provide a valid site on the internetz");
+    if (!validUrl.isUri(link)) {
+        return msg.channel.send("Provide a valid site on the internet!");
     }
 
     if (link.length >= 100) {

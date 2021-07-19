@@ -18,6 +18,17 @@ module.exports = (client, msg) => {
     }
 
     if (!link) {
+        const improperUsage = new Discord.MessageEmbed()
+            .setTitle("How to use Set Soundcloud")
+            .setColor("#ed411f")
+            .setDescription("Use this command to set your Soundcloud\n through the bot. It will appear on your profile.")
+            .addField("Example Usage:", "$setsc https://soundcloud.com/c418")
+            .setTimestamp();
+
+        return msg.channel.send(improperUsage);
+    }
+
+    if (link.toLowerCase() === "--clear") {
         msg.channel.send("Got it, your Soundcloud has been cleared.");        
         botstorage[msg.author.id] = "";
         return fs.writeFileSync(path.join(__dirname + '/../storage/soundcloud.json'), JSON.stringify(botstorage));
