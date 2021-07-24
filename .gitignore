@@ -24,3 +24,6 @@
 *.jar
 *.rar
 *.tar
+
+# Visual Studio stuff
+*.code-workspace
