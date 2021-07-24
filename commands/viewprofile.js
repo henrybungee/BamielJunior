@@ -13,6 +13,7 @@ const ltBotstorage = require(path.join(__dirname + '/../storage/treelink.json'))
 const spotBotstorage = require(path.join(__dirname + '/../storage/spotify.json'));
 const clBotstorage = require(path.join(__dirname + '/../storage/custom.json'));
 const favBotstorage = require(path.join(__dirname + '/../storage/favorite.json'));
+const userinfo = require(path.join(__dirname + '/../storage/userinfo.json'));
 
 module.exports = async (client, msg) => {
     const { channel, author: authorUser } = msg;
@@ -47,8 +48,16 @@ module.exports = async (client, msg) => {
         return;
     }
 
+    let verified = client.emojis.cache.find(emoji => emoji.name === "verifiedartist");
+    let name = nameBotstorage[userId] || user.username;
+
+    if (userinfo[user.id].verified == true) {
+        console.log("verified");
+        name += " " + verified.toString();
+    }
+
     const profileEmbed = new Discord.MessageEmbed()
-        .setTitle(nameBotstorage[userId] || user.username)
+        .setTitle(name)
         .setColor(colorBotstorage[userId] || '#303030')
         .setThumbnail(user.displayAvatarURL({dynamic: true}))
         .setTimestamp()

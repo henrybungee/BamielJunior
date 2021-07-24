@@ -11,7 +11,7 @@ module.exports = async (client, msg) => {
 
     const blacklistedUserIds = await blacklist.getBlacklistedUserIds();
     if (blacklistedUserIds.length === 0) {
-        await authorUser.send('Nobody is blacklisted!');
+        await msg.channel.send('Nobody is blacklisted!');
         return;
     }
     const blacklistEmbed = new Discord.MessageEmbed()
@@ -32,5 +32,11 @@ module.exports = async (client, msg) => {
         }
     }
 
+    const sentEmbed = new Discord.MessageEmbed()
+        .setTitle("Check your DMs!")
+        .setDescription("A list of the blacklisted users in this server have been sent to you via DMs.")
+        .setTimestamp();
+
+    msg.channel.send(sentEmbed);
     authorUser.send(blacklistEmbed);
 };

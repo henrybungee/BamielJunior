@@ -24,6 +24,8 @@ const setfav = require('../commands/setfav');
 const blacklist = require('../commands/blacklistuser');
 const listbanned = require('../commands/listbanned');
 const feedback = require('../commands/featurerecommend');
+const verify = require('../commands/verify');
+const unverify = require('../commands/unverify');
 
 module.exports = async (client, msg) => {
     const cmdPrefix = '!';
@@ -178,6 +180,14 @@ module.exports = async (client, msg) => {
         case 'blacklist':
         case 'b':
             await blacklist.blacklistCmd(client, msg);
+            break;
+        case 'verify':
+        case 'v':
+            await verify(client, msg);
+            break;
+        case 'unverify':
+        case 'unv':
+            await unverify(client, msg);
             break;
     }
 };
