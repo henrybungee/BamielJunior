@@ -19,7 +19,7 @@ fs.readdir('./events/', (err, files) => {
 
 //const botToken = process.env.BOT_TOKEN;
 
-client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.HgYUsuggQAchHDVOtkWZPjerUks');
+client.login('ODUxNTY5NjIxMTA2MDMyNjUx.YL6MAw.i4EJJOSmjP_QE3V0nfN2QQdssgc');
 
 //TODO LIST
 //#1: trophies command does something if you have trophies (DONE)
